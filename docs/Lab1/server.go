@@ -1,7 +1,7 @@
 package main
 
-import "fmt"i
+import "fmt"
 
 func main() {
-  fmt.Println("H, Mezidia")
+  fmt.Println("Hello, Mezidia")
 }
