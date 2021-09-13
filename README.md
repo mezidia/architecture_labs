@@ -15,21 +15,6 @@
   🌟Hello everyone! This is the repository of architecture labs.🌟
 </p>
 
-## The README Checklist
-
-A helpful checklist to gauge how your README is coming along:
-
-- [ ] One-liner explaining the purpose of the module
-- [ ] Necessary background context & links
-- [ ] Potentially unfamiliar terms link to informative sources
-- [ ] Clear, *runnable* example of usage
-- [ ] Installation instructions
-- [ ] Extensive API documentation
-- [ ] Performs [cognitive funneling](https://github.com/noffle/art-of-readme#cognitive-funneling)
-- [ ] Caveats and limitations mentioned up-front
-- [ ] Doesn't rely on images to relay critical information
-- [ ] License
-
 ## Motivation :exclamation:
 
 A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
