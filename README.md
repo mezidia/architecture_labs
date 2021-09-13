@@ -12,7 +12,7 @@
 </h1>
 
 <p align="center">
-  🌟Hello everyone! This is the repository of architecture labs.🌟
+  🌟Hello everyone! Its KD! This is the repository of architecture labs.🌟
 </p>
 
 ## Motivation :exclamation:
