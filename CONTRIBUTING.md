@@ -1,5 +1,5 @@
 <h1 align="center">
-    Contributing to <a href="https://github.com/mezgoodle/architecture_labs">architecture labs</a>
+    Contributing to <a href="https://github.com/mezidia/architecture_labs">architecture labs</a>
 </h1>
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
