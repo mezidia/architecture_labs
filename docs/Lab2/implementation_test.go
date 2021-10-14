@@ -119,6 +119,30 @@ func TestPrefix_Multiplication(t *testing.T) {
 	}
 }
 
+func TestPrefix_MultiplicationWithDozens(t *testing.T) {
+	actual, err := Prefix("* 30 10")
+	if assert.Nil(t, err) {
+		var expected = 300
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_MultiplicationWithHundreds(t *testing.T) {
+	actual, err := Prefix("* 600 150")
+	if assert.Nil(t, err) {
+		var expected = 90000
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_MultiplicationWithThousands(t *testing.T) {
+	actual, err := Prefix("* 9999 1111")
+	if assert.Nil(t, err) {
+		var expected = 11108889
+		assert.Equal(t, actual, expected)
+	}
+}
+
 func TestPrefix_Power(t *testing.T) {
 	actual, err := Prefix("^ 2 5")
 	if assert.Nil(t, err) {
