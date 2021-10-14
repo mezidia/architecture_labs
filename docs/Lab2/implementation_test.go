@@ -8,64 +8,80 @@ import (
 )
 
 func TestPrefix_Easy_First(t *testing.T) {
-	expected, err := Prefix("+ 5 * - 4 2 3")
+	actual, err := Prefix("+ 5 * - 4 2 3")
 	if assert.Nil(t, err) {
-		var actual = 11
+		var expected = 11
 		assert.Equal(t, actual, expected)
 	}
 }
 
 func TestPrefix_Addition(t *testing.T) {
-	expected, err := Prefix("+ 2 2")
+	actual, err := Prefix("+ 2 2")
 	if assert.Nil(t, err) {
-		var actual = 4
+		var expected = 4
 		assert.Equal(t, actual, expected)
 	}
 }
 
-func TestPrefix_1Addition(t *testing.T) {
-	expected, err := Prefix("+ 11 2")
+func TestPrefix_AdditionWithDozens(t *testing.T) {
+	actual, err := Prefix("+ 11 20")
 	if assert.Nil(t, err) {
-		var actual = 13
+		var expected = 31
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_AdditionWithHundreds(t *testing.T) {
+	actual, err := Prefix("+ 343 590")
+	if assert.Nil(t, err) {
+		var expected = 933
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_AdditionWithThousands(t *testing.T) {
+	actual, err := Prefix("+ 3449 2910")
+	if assert.Nil(t, err) {
+		var expected = 6359
 		assert.Equal(t, actual, expected)
 	}
 }
 
 func TestPrefix_Subtraction(t *testing.T) {
-	expected, err := Prefix("- 2 2")
+	actual, err := Prefix("- 2 2")
 	if assert.Nil(t, err) {
-		var actual = 0
+		var expected = 0
 		assert.Equal(t, actual, expected)
 	}
 }
 
 func TestPrefix_Division(t *testing.T) {
-	expected, err := Prefix("/ 16 2")
+	actual, err := Prefix("/ 16 2")
 	if assert.Nil(t, err) {
-		var actual = 8
+		var expected = 8
 		assert.Equal(t, actual, expected)
 	}
 }
 
 func TestPrefix_Multiplication(t *testing.T) {
-	expected, err := Prefix("* 3 4")
+	actual, err := Prefix("* 3 4")
 	if assert.Nil(t, err) {
-		var actual = 12
+		var expected = 12
 		assert.Equal(t, actual, expected)
 	}
 }
 
 func TestPrefix_Power(t *testing.T) {
-	expected, err := Prefix("^ 2 5")
+	actual, err := Prefix("^ 2 5")
 	if assert.Nil(t, err) {
-		var actual = 32
+		var expected = 32
 		assert.Equal(t, actual, expected)
 	}
 }
 
 func ExamplePrefix() {
-	expected, _ := Prefix("+ 2 2")
-	fmt.Println(expected)
+	actual, _ := Prefix("+ 2 2")
+	fmt.Println(actual)
 
 	// Output:
 	// 4
