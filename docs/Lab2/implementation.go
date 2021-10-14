@@ -13,7 +13,7 @@ func isNumber(symbol rune) bool {
 // Prefix converts
 func Prefix(input string) (int, error) {
 	var stack []int
-	var asciiOffset := 48
+	var asciiOffset byte = 48
 
 	for j := len(input) - 1; j >= 0; j-- {
 		if rune(input[j]) == ' ' {
@@ -42,19 +42,19 @@ func Prefix(input string) (int, error) {
 
 			switch rune(input[j]) {
 			case '+':
-				result := firstOperand+secondOperand
+				result := firstOperand + secondOperand
 				stack = append(stack, result)
 				break
 			case '-':
-				result := firstOperand-secondOperand
+				result := firstOperand - secondOperand
 				stack = append(stack, result)
 				break
 			case '*':
-				result := firstOperand*secondOperand
+				result := firstOperand * secondOperand
 				stack = append(stack, result)
 				break
 			case '/':
-				result := firstOperand/secondOperand
+				result := firstOperand / secondOperand
 				stack = append(stack, result)
 				break
 			case '^':
