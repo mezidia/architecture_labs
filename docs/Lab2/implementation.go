@@ -28,9 +28,10 @@ func Prefix(input string) (int, error) {
 			j++
 
 			for k := j; k <= i; k++ {
-				num = num*10 + int(input[k]-'0')
+				num = num + int(input[k]-'0')
 			}
 			stack = append(stack, num)
+
 		} else {
 			firstOperand := stack[len(stack)-1:][0]
 			stack = stack[:len(stack)-1]
@@ -40,19 +41,24 @@ func Prefix(input string) (int, error) {
 
 			switch rune(input[j]) {
 			case '+':
-				stack = append(stack, o1+o2)
+				result := firstOperand+secondOperand
+				stack = append(stack, result)
 				break
 			case '-':
-				stack = append(stack, o1-o2)
+				result := firstOperand-secondOperand
+				stack = append(stack, result)
 				break
 			case '*':
-				stack = append(stack, o1*o2)
+				result := firstOperand*secondOperand
+				stack = append(stack, result)
 				break
 			case '/':
-				stack = append(stack, o1/o2)
+				result := firstOperand/secondOperand
+				stack = append(stack, result)
 				break
 			case '^':
-				stack = append(stack, int(math.Pow(float64(o1), float64(o2))))
+				result := int(math.Pow(float64(firstOperand), float64(secondOperand)))
+				stack = append(stack, result)
 				break
 			}
 		}
