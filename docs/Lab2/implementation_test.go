@@ -55,6 +55,30 @@ func TestPrefix_Subtraction(t *testing.T) {
 	}
 }
 
+func TestPrefix_SubtractionWithDozens(t *testing.T) {
+	actual, err := Prefix("- 11 20")
+	if assert.Nil(t, err) {
+		var expected = -9
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_SubtractionWithHundreds(t *testing.T) {
+	actual, err := Prefix("- 343 590")
+	if assert.Nil(t, err) {
+		var expected = -247
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_SubtractionWithThousands(t *testing.T) {
+	actual, err := Prefix("- 3449 2910")
+	if assert.Nil(t, err) {
+		var expected = 539
+		assert.Equal(t, actual, expected)
+	}
+}
+
 func TestPrefix_Division(t *testing.T) {
 	actual, err := Prefix("/ 16 2")
 	if assert.Nil(t, err) {
