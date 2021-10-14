@@ -7,14 +7,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPrefix_Easy_First(t *testing.T) {
-	actual, err := Prefix("+ 5 * - 4 2 3")
-	if assert.Nil(t, err) {
-		var expected = 11
-		assert.Equal(t, actual, expected)
-	}
-}
-
 func TestPrefix_Addition(t *testing.T) {
 	actual, err := Prefix("+ 2 2")
 	if assert.Nil(t, err) {
@@ -147,6 +139,54 @@ func TestPrefix_Power(t *testing.T) {
 	actual, err := Prefix("^ 2 5")
 	if assert.Nil(t, err) {
 		var expected = 32
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_FirstEasyExample(t *testing.T) {
+	actual, err := Prefix("+ 5 * - 4 2 3")
+	if assert.Nil(t, err) {
+		var expected = 11
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_SecondEasyExample(t *testing.T) {
+	actual, err := Prefix("* - 5 6 7")
+	if assert.Nil(t, err) {
+		var expected = -7
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_ThirdEasyExample(t *testing.T) {
+	actual, err := Prefix("* + 1 2 + 3 4")
+	if assert.Nil(t, err) {
+		var expected = 21
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_FirstHardExample(t *testing.T) {
+	actual, err := Prefix("- * / 15 - 7 + 1 1 3 + 2 + 1 1")
+	if assert.Nil(t, err) {
+		var expected = 5
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_SecondHardExample(t *testing.T) {
+	actual, err := Prefix("+ + - - + 4 * 3 5 ^ 10 3 1 * / 120 5 3 2")
+	if assert.Nil(t, err) {
+		var expected = -908
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_ThirdHardExample(t *testing.T) {
+	actual, err := Prefix("- + - + - * / 4 2 6 3 221 ^ 321 2 / 3 3 * 98 2")
+	if assert.Nil(t, err) {
+		var expected = -103006
 		assert.Equal(t, actual, expected)
 	}
 }
