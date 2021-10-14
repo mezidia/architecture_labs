@@ -13,6 +13,7 @@ func isNumber(symbol rune) bool {
 // Prefix converts
 func Prefix(input string) (int, error) {
 	var stack []int
+	var asciiOffset := 48
 
 	for j := len(input) - 1; j >= 0; j-- {
 		if rune(input[j]) == ' ' {
@@ -28,7 +29,7 @@ func Prefix(input string) (int, error) {
 			j++
 
 			for k := j; k <= i; k++ {
-				num = num + int(input[k]-'0')
+				num = num + int(input[k]-asciiOffset)
 			}
 			stack = append(stack, num)
 
