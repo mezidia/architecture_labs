@@ -80,9 +80,33 @@ func TestPrefix_SubtractionWithThousands(t *testing.T) {
 }
 
 func TestPrefix_Division(t *testing.T) {
-	actual, err := Prefix("/ 16 2")
+	actual, err := Prefix("/ 4 2")
 	if assert.Nil(t, err) {
-		var expected = 8
+		var expected = 2
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_DivisionWithDozens(t *testing.T) {
+	actual, err := Prefix("/ 30 10")
+	if assert.Nil(t, err) {
+		var expected = 3
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_DivisionWithHundreds(t *testing.T) {
+	actual, err := Prefix("/ 600 150")
+	if assert.Nil(t, err) {
+		var expected = 4
+		assert.Equal(t, actual, expected)
+	}
+}
+
+func TestPrefix_DivisionWithThousands(t *testing.T) {
+	actual, err := Prefix("/ 9999 1111")
+	if assert.Nil(t, err) {
+		var expected = 9
 		assert.Equal(t, actual, expected)
 	}
 }
