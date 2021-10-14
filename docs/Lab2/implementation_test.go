@@ -39,13 +39,13 @@ func TestPrefix_Subtraction(t *testing.T) {
 	}
 }
 
-// func TestPrefix_Division(t *testing.T) {
-// 	expected, err := Prefix("/ 16 2")
-// 	if assert.Nil(t, err) {
-// 		var actual = 8
-// 		assert.Equal(t, actual, expected)
-// 	}
-// }
+func TestPrefix_Division(t *testing.T) {
+	expected, err := Prefix("/ 16 2")
+	if assert.Nil(t, err) {
+		var actual = 8
+		assert.Equal(t, actual, expected)
+	}
+}
 
 func TestPrefix_Multiplication(t *testing.T) {
 	expected, err := Prefix("* 3 4")
