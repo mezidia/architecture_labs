@@ -5,7 +5,7 @@ import (
 	"unicode"
 )
 
-func isDigit(symbol rune) bool {
+func isNumber(symbol rune) bool {
 	return unicode.IsDigit(symbol)
 }
 
@@ -14,16 +14,15 @@ func isDigit(symbol rune) bool {
 func Prefix(input string) (int, error) {
 	var stack []int
 
-	// "+ 2 2"
-
 	for j := len(input) - 1; j >= 0; j-- {
 		if rune(input[j]) == ' ' {
 			continue
 		}
-		if isDigit(rune(input[j])) {
+
+		if isNumber(rune(input[j])) {
 			num := 0
 			i := j
-			for j < len(input) && isDigit(rune(input[j])) {
+			for j < len(input) && isNumber(rune(input[j])) {
 				j--
 			}
 			j++
@@ -33,10 +32,12 @@ func Prefix(input string) (int, error) {
 			}
 			stack = append(stack, num)
 		} else {
-			o1 := stack[len(stack)-1:][0]
+			firstOperand := stack[len(stack)-1:][0]
 			stack = stack[:len(stack)-1]
-			o2 := stack[len(stack)-1:][0]
+
+			secondOperand := stack[len(stack)-1:][0]
 			stack = stack[:len(stack)-1]
+
 			switch rune(input[j]) {
 			case '+':
 				stack = append(stack, o1+o2)
