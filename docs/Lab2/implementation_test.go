@@ -8,16 +8,17 @@ import (
 )
 
 func TestPrefix(t *testing.T) {
-	res, err := Prefix("+ 5 * - 4 2 3")
+	expected, err := Prefix("+ 5 * - 4 2 3")
 	if assert.Nil(t, err) {
-		assert.Equal(t, "4 2 - 3 * 5 +", res)
+		var actual = 11
+		assert.Equal(t, actual, expected)
 	}
 }
 
 func ExamplePrefix() {
-	res, _ := Prefix("+ 2 2")
-	fmt.Println(res)
+	expected, _ := Prefix("+ 2 2")
+	fmt.Println(expected)
 
 	// Output:
-	// 2 2 +
+	// 4
 }

@@ -4,13 +4,13 @@ import (
 	"flag"
 	"fmt"
 
-	lab2 "github.com/roman-mazur/architecture-lab-2"
+	lab2 "github.com/mezidia/architecture_labs/tree/main/docs/Lab2"
 )
 
-var (
-	inputExpression = flag.String("e", "", "Expression to compute")
-	// TODO: Add other flags support for input and output configuration.
-)
+// var (
+// 	inputExpression = flag.String("e", "", "Expression to compute")
+// 	// TODO: Add other flags support for input and output configuration.
+// )
 
 func main() {
 	flag.Parse()
