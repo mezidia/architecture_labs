@@ -191,8 +191,16 @@ func TestPrefix_ThirdHard(t *testing.T) {
 	}
 }
 
-func TestPrefix_OnlyOneError(t *testing.T) {
+func TestPrefix_OnlyOneDivisionError(t *testing.T) {
 	_, err := Prefix("/")
+	assert.NotNil(t, err)
+	if assert.Error(t, err) {
+		assert.Equal(t, fmt.Errorf("unexpected input"), err)
+	}
+}
+
+func TestPrefix_OnlyOnePowError(t *testing.T) {
+	_, err := Prefix("^")
 	assert.NotNil(t, err)
 	if assert.Error(t, err) {
 		assert.Equal(t, fmt.Errorf("unexpected input"), err)
@@ -241,6 +249,14 @@ func TestPrefix_LettersError(t *testing.T) {
 
 func TestPrefix_MoreDigitsThanOperandsError(t *testing.T) {
 	_, err := Prefix("+ 3 3 3")
+	assert.NotNil(t, err)
+	if assert.Error(t, err) {
+		assert.Equal(t, fmt.Errorf("unexpected input"), err)
+	}
+}
+
+func TestPrefix_BigDigitsMoreThanOperandsError(t *testing.T) {
+	_, err := Prefix("+ 33 322 3111")
 	assert.NotNil(t, err)
 	if assert.Error(t, err) {
 		assert.Equal(t, fmt.Errorf("unexpected input"), err)
