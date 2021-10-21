@@ -143,7 +143,7 @@ func TestPrefix_Power(t *testing.T) {
 	}
 }
 
-func TestPrefix_FirstEasyExample(t *testing.T) {
+func TestPrefix_FirstEasy(t *testing.T) {
 	actual, err := Prefix("+ 5 * - 4 2 3")
 	if assert.Nil(t, err) {
 		var expected = 11
@@ -151,7 +151,7 @@ func TestPrefix_FirstEasyExample(t *testing.T) {
 	}
 }
 
-func TestPrefix_SecondEasyExample(t *testing.T) {
+func TestPrefix_SecondEasy(t *testing.T) {
 	actual, err := Prefix("* - 5 6 7")
 	if assert.Nil(t, err) {
 		var expected = -7
@@ -159,7 +159,7 @@ func TestPrefix_SecondEasyExample(t *testing.T) {
 	}
 }
 
-func TestPrefix_ThirdEasyExample(t *testing.T) {
+func TestPrefix_ThirdEasy(t *testing.T) {
 	actual, err := Prefix("* + 1 2 + 3 4")
 	if assert.Nil(t, err) {
 		var expected = 21
@@ -167,7 +167,7 @@ func TestPrefix_ThirdEasyExample(t *testing.T) {
 	}
 }
 
-func TestPrefix_FirstHardExample(t *testing.T) {
+func TestPrefix_FirstHard(t *testing.T) {
 	actual, err := Prefix("- * / 15 - 7 + 1 1 3 + 2 + 1 1")
 	if assert.Nil(t, err) {
 		var expected = 5
@@ -175,7 +175,7 @@ func TestPrefix_FirstHardExample(t *testing.T) {
 	}
 }
 
-func TestPrefix_SecondHardExample(t *testing.T) {
+func TestPrefix_SecondHard(t *testing.T) {
 	actual, err := Prefix("+ + - - + 4 * 3 5 ^ 10 3 1 * / 120 5 3 2")
 	if assert.Nil(t, err) {
 		var expected = -908
@@ -183,7 +183,7 @@ func TestPrefix_SecondHardExample(t *testing.T) {
 	}
 }
 
-func TestPrefix_ThirdHardExample(t *testing.T) {
+func TestPrefix_ThirdHard(t *testing.T) {
 	actual, err := Prefix("- + - + - * / 4 2 6 3 221 ^ 321 2 / 3 3 * 98 2")
 	if assert.Nil(t, err) {
 		var expected = -103006
@@ -191,9 +191,60 @@ func TestPrefix_ThirdHardExample(t *testing.T) {
 	}
 }
 
-func TestPrefix_ThirdHardExampl(t *testing.T) {
+func TestPrefix_OnlyOneError(t *testing.T) {
+	_, err := Prefix("/")
+	assert.NotNil(t, err)
+	if assert.Error(t, err) {
+		assert.Equal(t, fmt.Errorf("unexpected input"), err)
+	}
+}
+
+func TestPrefix_OnlyTwoOperandsError(t *testing.T) {
 	_, err := Prefix("- +")
 	assert.NotNil(t, err)
+	if assert.Error(t, err) {
+		assert.Equal(t, fmt.Errorf("unexpected input"), err)
+	}
+}
+
+func TestPrefix_BlankError(t *testing.T) {
+	_, err := Prefix("")
+	assert.NotNil(t, err)
+	if assert.Error(t, err) {
+		assert.Equal(t, fmt.Errorf("unexpected input"), err)
+	}
+}
+
+func TestPrefix_EmptyError(t *testing.T) {
+	_, err := Prefix(" ")
+	assert.NotNil(t, err)
+	if assert.Error(t, err) {
+		assert.Equal(t, fmt.Errorf("blank input"), err)
+	}
+}
+
+func TestPrefix_OneLetterError(t *testing.T) {
+	_, err := Prefix("f")
+	assert.NotNil(t, err)
+	if assert.Error(t, err) {
+		assert.Equal(t, fmt.Errorf("unexpected symbol"), err)
+	}
+}
+
+func TestPrefix_LettersError(t *testing.T) {
+	_, err := Prefix("DFSDFSDF")
+	assert.NotNil(t, err)
+	if assert.Error(t, err) {
+		assert.Equal(t, fmt.Errorf("unexpected symbol"), err)
+	}
+}
+
+func TestPrefix_MoreDigitsThanOperandsError(t *testing.T) {
+	_, err := Prefix("+ 3 3 3")
+	assert.NotNil(t, err)
+	if assert.Error(t, err) {
+		assert.Equal(t, fmt.Errorf("unexpected input"), err)
+	}
 }
 
 func ExamplePrefix() {
