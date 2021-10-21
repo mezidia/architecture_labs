@@ -23,6 +23,9 @@ func main() {
 	//       }
 	//       err := handler.Compute()
 
-	res, _ := lab2.Prefix("+ 11 20")
-	fmt.Println(res)
+	res, err := lab2.Prefix("+ 11 20")
+	if err == nil {
+		fmt.Println(res)
+	}
+
 }

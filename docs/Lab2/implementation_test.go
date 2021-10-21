@@ -191,6 +191,11 @@ func TestPrefix_ThirdHardExample(t *testing.T) {
 	}
 }
 
+func TestPrefix_ThirdHardExampl(t *testing.T) {
+	_, err := Prefix("- +")
+	assert.NotNil(t, err)
+}
+
 func ExamplePrefix() {
 	actual, _ := Prefix("+ 2 2")
 	fmt.Println(actual)
