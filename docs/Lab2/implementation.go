@@ -1,6 +1,7 @@
 package lab2
 
 import (
+	"fmt"
 	"math"
 	"unicode"
 )
@@ -13,7 +14,7 @@ func isNumber(symbol rune) bool {
 // Prefix converts
 func Prefix(input string) (int, error) {
 	if input == " " {
-		panic("blank input")
+		return 0, fmt.Errorf("blank input")
 	}
 
 	var numbers, chars int
@@ -31,11 +32,11 @@ func Prefix(input string) (int, error) {
 			// found an ariphmetic operator
 			chars++
 		} else if symbol != 32 { // not space
-			panic("unexpected symbol")
+			return 0, fmt.Errorf("unexpected symbol")
 		}
 	}
 	if numbers-1 != chars {
-		panic("unexpected input")
+		return 0, fmt.Errorf("unexpected input")
 	}
 
 	var stack []int
