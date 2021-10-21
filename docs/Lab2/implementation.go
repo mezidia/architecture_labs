@@ -30,7 +30,7 @@ func Prefix(input string) (int, error) {
 			j++
 
 			for k := j; k <= i; k++ {
-				num = num*multiplyOffset + int(input[k]-asciiOffset) //was - '0'
+				num = multiplyOffset*num + int(input[k]-asciiOffset) //was -'0'
 			}
 			stack = append(stack, num)
 
