@@ -12,6 +12,29 @@ func isNumber(symbol rune) bool {
 // TODO: document this function.
 // Prefix converts
 func Prefix(input string) (int, error) {
+	if input == " " {
+		panic("blank input")
+	}
+
+	var numbers, chars int
+	// 48 - 57 = numbers
+	// ^ - 94; * - 42; + - 43; - - 45; / - 47
+	for index := 0; index < len(input); index++ {
+		symbol := input[index]
+		if 48 <= symbol && symbol <= 57 {
+			// found a number
+			numbers++
+		} else if symbol == 94 || symbol == 42 || symbol == 43 || symbol == 45 || symbol == 47 {
+			// found an ariphmetic operator
+			chars++
+		} else if symbol != 32 { // not space
+			panic("unexpected symbol")
+		}
+	}
+	if numbers-1 != chars {
+		panic("unexpected input")
+	}
+
 	var stack []int
 	var asciiOffset byte = 48
 	var multiplyOffset int = 10
