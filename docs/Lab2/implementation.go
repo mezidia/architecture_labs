@@ -23,6 +23,9 @@ func Prefix(input string) (int, error) {
 		symbol := input[index]
 		if 48 <= symbol && symbol <= 57 {
 			// found a number
+			if index != len(input)-1 && 48 <= input[index+1] && input[index+1] <= 57 {
+				continue
+			}
 			numbers++
 		} else if symbol == 94 || symbol == 42 || symbol == 43 || symbol == 45 || symbol == 47 {
 			// found an ariphmetic operator
