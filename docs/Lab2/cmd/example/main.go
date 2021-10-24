@@ -16,11 +16,6 @@ import (
 // )
 
 func main() {
-	// var (
-	// 	inputExpression = flag.String("e", "", "Expression to compute")
-	// 	// TODO: Add other flags support for input and output configuration.
-	// )
-
 	inputExpression := flag.String("e", "", "Expression to compute")
 	inputFile := flag.String("f", "", "File with expression")
 	outputFile := flag.String("o", "", "File with result")
@@ -38,6 +33,7 @@ func main() {
 	expressionToUse := ""
 	if len(*inputExpression) > 0 {
 		expressionToUse = *inputExpression
+
 	} else if len(*inputFile) > 0 {
 		input, err := os.ReadFile(*inputFile)
 
@@ -51,10 +47,10 @@ func main() {
 	res, err := lab2.Prefix(expressionToUse)
 	if err == nil {
 		if len(*outputFile) > 0 {
-			data := strconv.Itoa(res)
+			resInString := strconv.Itoa(res)
+			data := []byte(resInString)
 
-			bytes := []byte(data)
-			os.WriteFile(*outputFile, bytes, 0666)
+			os.WriteFile(*outputFile, data, 0666)
 		} else {
 			fmt.Println(res)
 		}
