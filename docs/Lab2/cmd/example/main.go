@@ -54,5 +54,7 @@ func main() {
 		} else {
 			fmt.Println(res)
 		}
+	} else {
+		fmt.Println(err)
 	}
 }
