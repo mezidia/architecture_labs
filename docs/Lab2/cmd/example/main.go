@@ -1,10 +1,10 @@
 package main
 
 import (
-	"debug/elf"
 	"flag"
 	"fmt"
-	"io"
+	"log"
+	"os"
 
 	lab2 "github.com/mezidia/architecture_labs/tree/main/docs/Lab2"
 )
@@ -22,7 +22,7 @@ func main() {
 
 	inputExpression := flag.String("e", "", "Expression to compute")
 	inputFile := flag.String("f", "", "File with expression")
-	outputFile := flag.String("o", "", "File with result")
+	//outputFile := flag.String("o", "", "File with result")
 
 	flag.Parse()
 
@@ -35,12 +35,16 @@ func main() {
 	//       err := handler.Compute()
 
 	expressionToUse := ""
+	if len(*inputExpression) > 0 {
+		expressionToUse = *inputExpression
+	} else if len(*inputFile) > 0 {
+		input, err := os.ReadFile(*inputFile)
 
-	if inputExpression != nil {
-		expressionToUse = *inputExpression
-	}
-	else if inputFile != nil {
-		expressionToUse = *inputExpression
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		expressionToUse = string(input)
 	}
 
 	res, err := lab2.Prefix(expressionToUse)
