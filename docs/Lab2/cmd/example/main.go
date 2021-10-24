@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 
 	lab2 "github.com/mezidia/architecture_labs/tree/main/docs/Lab2"
 )
@@ -22,7 +23,7 @@ func main() {
 
 	inputExpression := flag.String("e", "", "Expression to compute")
 	inputFile := flag.String("f", "", "File with expression")
-	//outputFile := flag.String("o", "", "File with result")
+	outputFile := flag.String("o", "", "File with result")
 
 	flag.Parse()
 
@@ -49,6 +50,13 @@ func main() {
 
 	res, err := lab2.Prefix(expressionToUse)
 	if err == nil {
-		fmt.Println(res)
+		if len(*outputFile) > 0 {
+			data := strconv.Itoa(res)
+
+			bytes := []byte(data)
+			os.WriteFile(*outputFile, bytes, 0666)
+		} else {
+			fmt.Println(res)
+		}
 	}
 }
