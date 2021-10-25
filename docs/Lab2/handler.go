@@ -1,7 +1,6 @@
 package lab2
 
 import (
-	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -18,15 +17,10 @@ type ComputeHandler struct {
 }
 
 func (ch *ComputeHandler) Compute() error {
-	inputExpression := flag.String("e", "", "Expression to compute")
-	inputFile := flag.String("f", "", "File with expression")
-	outputFile := flag.String("o", "", "File with result")
-
-	flag.Parse()
-
 	expressionToUse := ""
-	if len(*inputExpression) > 0 {
-		expressionToUse = *inputExpression
+	buf := make([]byte, 4)
+	if len(ch.Input.Read(buf)) > 0 {
+		expressionToUse = ch.Input
 
 	} else if len(*inputFile) > 0 {
 		input, err := os.ReadFile(*inputFile)
