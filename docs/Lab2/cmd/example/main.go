@@ -3,22 +3,26 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"os"
-	"strconv"
 
 	lab2 "github.com/mezidia/architecture_labs/tree/main/docs/Lab2"
 )
 
-// var (
-// 	inputExpression = flag.String("e", "", "Expression to compute")
-// 	// TODO: Add other flags support for input and output configuration.
-// )
+var (
+	inputExpression = flag.String("e", "", "Expression to compute")
+	inputFile       = flag.String("f", "", "File with expression")
+	outputFile      = flag.String("o", "", "File with result")
+)
 
 func main() {
-	com := lab2.ComputeHandler{
-		In:  strings.NewReader("Main reader"),
-		Out: 
+	flag.Parse()
+
+	handler := &lab2.ComputeHandler{
+		Input:  os.Stdin,
+		Output: os.Stdout,
 	}
-	com.Compute()
+	err := handler.Compute()
+	if err != nil {
+		fmt.Println(err)
+	}
 }
