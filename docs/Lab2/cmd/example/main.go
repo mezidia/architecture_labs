@@ -18,18 +18,24 @@ var (
 func main() {
 	flag.Parse()
 
-	var in *strings.Reader
-	if len(*inputExpression) > 0 {
-		in = strings.NewReader(*inputExpression)
-	}
-	else
+	if (*inputExpression != "" && *inputFile != "") ||
+		(*inputExpression == "" && *inputFile == "") {
+		fmt.Errorf("unexpected input")
+	} else {
+		var inputFromCMD *strings.Reader
+		var inputFromFile os.File
 
-	handler := &lab2.ComputeHandler{
-		Input:  in,
-		Output: os.Stdout,
-	}
-	err := handler.Compute()
-	if err != nil {
-		fmt.Println(err)
+		if len(*inputExpression) > 0 {
+			inputFromCMD = strings.NewReader(*inputExpression)
+		}
+
+		handler := &lab2.ComputeHandler{
+			Input:  inputFromCMD,
+			Output: os.Stdout,
+		}
+		err := handler.Compute()
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 }
