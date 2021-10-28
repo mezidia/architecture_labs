@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 
@@ -20,18 +22,39 @@ func main() {
 
 	if (*inputExpression != "" && *inputFile != "") ||
 		(*inputExpression == "" && *inputFile == "") {
-		fmt.Errorf("unexpected input")
+		fmt.Println("unexpected input")
 	} else {
 		var inputFromCMD *strings.Reader
-		var inputFromFile os.File
+		var inputFromFile io.Reader
+		var input io.Reader
+		var output io.Writer
 
 		if len(*inputExpression) > 0 {
 			inputFromCMD = strings.NewReader(*inputExpression)
+			input = inputFromCMD
+		} else {
+			inputExpressionFromFile, err := os.ReadFile(*inputFile)
+			if err != nil {
+				fmt.Println(err)
+			}
+			// convert byte slice to io.Reader
+			inputFromFile = bytes.NewReader(inputExpressionFromFile)
+			input = inputFromFile
+		}
+
+		if len(*outputFile) > 0 {
+			outputToFile, err := os.Create(*outputFile)
+			if err != nil {
+				fmt.Println(err)
+			}
+			output = outputToFile
+		} else {
+			output = os.Stdout
 		}
 
 		handler := &lab2.ComputeHandler{
-			Input:  inputFromCMD,
-			Output: os.Stdout,
+			Input:  input,
+			Output: output,
 		}
 		err := handler.Compute()
 		if err != nil {
