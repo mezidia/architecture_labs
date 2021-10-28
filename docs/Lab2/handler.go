@@ -2,8 +2,8 @@ package lab2
 
 import (
 	"bytes"
-	"fmt"
 	"io"
+	"strconv"
 )
 
 type ComputeHandler struct {
@@ -14,20 +14,13 @@ type ComputeHandler struct {
 func (ch *ComputeHandler) Compute() error {
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(ch.Input)
+	expression := buf.String()
 
-	res, err := Prefix(buf.String())
+	res, err := Prefix(expression)
 	if err == nil {
-		// 	if len(*outputFile) > 0 {
-		// 		resInString := strconv.Itoa(res)
-		// 		data := []byte(resInString)
-
-		// 		os.WriteFile(*outputFile, data, 0666)
-		// 	} else {
-		// 		fmt.Fprintln(ch.Output, res)
-		// 	}
-		// } else {
-		// 	fmt.Fprintln(ch.Output, err)
+		resInString := strconv.Itoa(res)
+		data := []byte(resInString)
+		ch.Output.Write(data)
 	}
-	fmt.Println(res)
 	return nil
 }
