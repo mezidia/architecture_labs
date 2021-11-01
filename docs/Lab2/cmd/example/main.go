@@ -24,22 +24,17 @@ func main() {
 		(*inputExpression == "" && *inputFile == "") {
 		fmt.Println("unexpected input")
 	} else {
-		var inputFromCMD *strings.Reader
-		var inputFromFile io.Reader
 		var input io.Reader
 		var output io.Writer
 
 		if len(*inputExpression) > 0 {
-			inputFromCMD = strings.NewReader(*inputExpression)
-			input = inputFromCMD
+			input = strings.NewReader(*inputExpression)
 		} else {
 			inputExpressionFromFile, err := os.ReadFile(*inputFile)
 			if err != nil {
 				fmt.Println(err)
 			}
-			// convert byte slice to io.Reader
-			inputFromFile = bytes.NewReader(inputExpressionFromFile)
-			input = inputFromFile
+			input = bytes.NewReader(inputExpressionFromFile)
 		}
 
 		if len(*outputFile) > 0 {
