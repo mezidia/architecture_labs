@@ -1,19 +1,21 @@
 package lab2
 
 import (
+	"bytes"
+	"strings"
 	"testing"
 
-	lab2 "github.com/mezidia/architecture_labs/tree/main/docs/Lab2"
 	"github.com/stretchr/testify/assert"
 )
 
 func Test1(t *testing.T) {
 	input := "+ 3 2"
-	output := ""
-	handler := &lab2.ComputeHandler{
-		Input:  input,
+	inputReader := strings.NewReader(input)
+	output := bytes.NewBufferString("")
+	handler := ComputeHandler{
+		Input:  inputReader,
 		Output: output,
 	}
 	err := handler.Compute()
-	assert.NotNil(err)
+	assert.Nil(t, err)
 }

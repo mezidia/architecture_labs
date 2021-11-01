@@ -24,6 +24,7 @@ func (ch *ComputeHandler) Compute() error {
 		ch.Output.Write(data)
 	} else {
 		fmt.Println(err)
+		return err
 	}
 	return nil
 }
