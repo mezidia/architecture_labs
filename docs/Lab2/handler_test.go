@@ -22,7 +22,7 @@ func Test_Compute(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func Test_Compute_Error(t *testing.T) {
+func Test_Compute_ErrorMoreDigits(t *testing.T) {
 	input := "+ 3 2 2"
 	inputReader := strings.NewReader(input)
 	output := bytes.NewBufferString("")
@@ -33,5 +33,30 @@ func Test_Compute_Error(t *testing.T) {
 	err := handler.Compute()
 	assert.Equal(t, output.String(), "")
 	assert.NotNil(t, err)
-	// You are durik
+}
+
+func Test_Compute_ErrorMoreOperands(t *testing.T) {
+	input := "+ - 3 2"
+	inputReader := strings.NewReader(input)
+	output := bytes.NewBufferString("")
+	handler := ComputeHandler{
+		Input:  inputReader,
+		Output: output,
+	}
+	err := handler.Compute()
+	assert.Equal(t, output.String(), "")
+	assert.NotNil(t, err)
+}
+
+func Test_Compute_ErrorLetters(t *testing.T) {
+	input := "letters"
+	inputReader := strings.NewReader(input)
+	output := bytes.NewBufferString("")
+	handler := ComputeHandler{
+		Input:  inputReader,
+		Output: output,
+	}
+	err := handler.Compute()
+	assert.Equal(t, output.String(), "")
+	assert.NotNil(t, err)
 }
