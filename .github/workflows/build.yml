@@ -25,7 +25,3 @@ jobs:
     - name: Test
       working-directory: ./docs/lab2
       run: make test
-
-      - name: Build
-      working-directory: ./docs/lab2
-      run: go build -o out/example ./cmd/example
