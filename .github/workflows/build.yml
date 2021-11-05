@@ -18,11 +18,14 @@ jobs:
       with:
         go-version: 1.17
 
-    - name: Test and Vet
-      working-directory: ./docs/lab2
-      run: make vet
-      run: make test
-
     - name: Clean
       working-directory: ./docs/lab2
       run: make clean
+
+    - name: Vet
+      working-directory: ./docs/lab2
+      run: make vet
+
+    - name: Test
+      working-directory: ./docs/lab2
+      run: make test
