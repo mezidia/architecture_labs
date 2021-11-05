@@ -22,10 +22,6 @@ jobs:
       working-directory: ./docs/lab2
       run: make clean
 
-    - name: Vet
-      working-directory: ./docs/lab2
-      run: go vet
-
     - name: Test
       working-directory: ./docs/lab2
       run: make test
