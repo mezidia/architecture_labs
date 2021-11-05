@@ -18,10 +18,6 @@ jobs:
       with:
         go-version: 1.17
 
-    - name: Build
-      working-directory: ./docs/lab2
-      run: make
-
     - name: Clean
       working-directory: ./docs/lab2
       run: make clean
@@ -29,3 +25,7 @@ jobs:
     - name: Test
       working-directory: ./docs/lab2
       run: make test
+
+    - name: Build
+      working-directory: ./docs/lab2
+      run: make
