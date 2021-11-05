@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    
+    - name: copyEnv
+      run: cp .env.dev .env
 
     - name: Set up Go
       uses: actions/setup-go@v2
