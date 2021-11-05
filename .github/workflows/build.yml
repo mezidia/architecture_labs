@@ -20,8 +20,8 @@ jobs:
 
     - name: Test
       working-directory: ./docs/lab2
-      run: go test
-      
+      run: make test
+
     - name: Vet
       working-directory: ./docs/lab2
       run: go vet
