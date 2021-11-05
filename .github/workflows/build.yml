@@ -28,4 +28,4 @@ jobs:
 
       - name: Build
       working-directory: ./docs/lab2
-      run: make
+      run: go build -o out/example ./cmd/example
