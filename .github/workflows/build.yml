@@ -24,7 +24,7 @@ jobs:
 
     - name: Vet
       working-directory: ./docs/lab2
-      run: make vet
+      run: go vet
 
     - name: Test
       working-directory: ./docs/lab2
