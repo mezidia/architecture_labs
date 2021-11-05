@@ -20,7 +20,7 @@ jobs:
 
     - name: Test and Vet
       working-directory: ./docs/lab2
-      run: go vet
+      run: make vet
       run: make test
 
     - name: Clean
