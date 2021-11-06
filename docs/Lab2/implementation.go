@@ -10,7 +10,6 @@ func isNumber(symbol rune) bool {
 	return unicode.IsDigit(symbol)
 }
 
-// TODO: document this function.
 // Prefix converts
 func Prefix(input string) (int, error) {
 	if input == " " {
