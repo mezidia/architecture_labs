@@ -18,7 +18,7 @@ func TestPrefix_Addition(t *testing.T) {
 func TestPrefix_AdditionWithDozens(t *testing.T) {
 	actual, err := Prefix("+ 11 20")
 	if assert.Nil(t, err) {
-		var expected = 31
+		var expected = 32
 		assert.Equal(t, actual, expected)
 	}
 }
