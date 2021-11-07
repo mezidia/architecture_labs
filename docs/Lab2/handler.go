@@ -2,7 +2,6 @@ package lab2
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"strconv"
 )
@@ -23,7 +22,6 @@ func (ch *ComputeHandler) Compute() error {
 		data := []byte(resInString)
 		ch.Output.Write(data)
 	} else {
-		fmt.Println(err)
 		return err
 	}
 	return nil

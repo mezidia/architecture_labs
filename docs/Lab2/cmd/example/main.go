@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"flag"
-	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -22,7 +21,7 @@ func main() {
 
 	if (*inputExpression != "" && *inputFile != "") ||
 		(*inputExpression == "" && *inputFile == "") {
-		os.Stderr.WriteString("d")
+		os.Stderr.WriteString("unexpected input")
 	} else {
 		var input io.Reader
 		var output io.Writer
@@ -32,7 +31,7 @@ func main() {
 		} else {
 			inputExpressionFromFile, err := os.ReadFile(*inputFile)
 			if err != nil {
-				fmt.Println(err)
+				os.Stderr.WriteString(err.Error())
 			}
 			input = bytes.NewReader(inputExpressionFromFile)
 		}
