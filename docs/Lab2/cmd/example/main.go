@@ -22,7 +22,7 @@ func main() {
 
 	if (*inputExpression != "" && *inputFile != "") ||
 		(*inputExpression == "" && *inputFile == "") {
-		fmt.Println("unexpected input")
+		os.Stderr.WriteString("d")
 	} else {
 		var input io.Reader
 		var output io.Writer
@@ -40,7 +40,7 @@ func main() {
 		if len(*outputFile) > 0 {
 			outputToFile, err := os.Create(*outputFile)
 			if err != nil {
-				fmt.Println(err)
+				os.Stderr.WriteString(err.Error())
 			}
 			output = outputToFile
 		} else {
@@ -53,7 +53,7 @@ func main() {
 		}
 		err := handler.Compute()
 		if err != nil {
-			fmt.Println(err)
+			os.Stderr.WriteString(err.Error())
 		}
 	}
 }
