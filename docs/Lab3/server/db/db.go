@@ -36,7 +36,7 @@ func (c *Connection) Open() (*sql.DB, error) {
 var db, err = Open(Connection{
 	Dbname:     "products",
 	User:       "root",
-	Password:   "1Max2Victor",
+	Password:   "password",
 	Host:       "localhost",
 	DisableSSL: true,
 })
