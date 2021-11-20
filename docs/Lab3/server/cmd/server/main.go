@@ -3,11 +3,12 @@ package main
 import (
 	"database/sql"
 	"flag"
-	"github.com/roman-mazur/chat-channels-example/server/db"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+
+	"github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/db"
 )
 
 var httpPortNumber = flag.Int("p", 8080, "HTTP port number")

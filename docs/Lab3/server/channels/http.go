@@ -2,9 +2,10 @@ package channels
 
 import (
 	"encoding/json"
-	"github.com/roman-mazur/chat-channels-example/server/tools"
 	"log"
 	"net/http"
+
+	"github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/tools"
 )
 
 // Channels HTTP handler.

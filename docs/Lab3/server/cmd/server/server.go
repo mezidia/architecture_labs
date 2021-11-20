@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/roman-mazur/chat-channels-example/server/channels"
 	"net/http"
+
+	"github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/channels"
 )
 
 type HttpPortNumber int
