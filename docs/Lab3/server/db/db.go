@@ -32,11 +32,3 @@ func (c *Connection) ConnectionURL() string {
 func (c *Connection) Open() (*sql.DB, error) {
 	return sql.Open("postgres", c.ConnectionURL())
 }
-
-var db, err = Open(Connection{
-	Dbname:     "products",
-	User:       "root",
-	Password:   "password",
-	Host:       "localhost",
-	DisableSSL: true,
-})
