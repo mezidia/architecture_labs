@@ -30,11 +30,10 @@ func TestDbConnection_Open(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
+	defer db.Close()
 
 	err = db.Ping()
 	if err != nil {
 		t.Error("Connection failed...")
 	}
-
-	defer db.Close()
 }
