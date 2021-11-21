@@ -54,3 +54,13 @@ func (c *Connection) SelectAllOrders(db *sql.DB) (*sql.Rows, error) {
 	rows, err := db.Query("select * from orders.orders")
 	return rows, err
 }
+
+func (c *Connection) SelectOneDishByID(db *sql.DB, id int) (*sql.Rows, error) {
+	row, err := db.Query("select * from dishes.dishes where id = $1", id)
+	return row, err
+}
+
+func (c *Connection) SelectOneOrderByID(db *sql.DB, id int) (*sql.Rows, error) {
+	row, err := db.Query("select * from orders.orders where id = $1", id)
+	return row, err
+}
