@@ -74,3 +74,13 @@ func (c *Connection) UpdateOrder(db *sql.DB, fieldName string, value, id int) er
 	_, err := db.Exec("update orders.orders set "+fieldName+" = $1 where id = $2", value, id)
 	return err
 }
+
+func (c *Connection) DeleteDish(db *sql.DB, id int) error {
+	_, err := db.Exec("delete from dishes.dishes where id = $1", id)
+	return err
+}
+
+func (c *Connection) DeleteOrder(db *sql.DB, id int) error {
+	_, err := db.Exec("delete from orders.orders where id = $1", id)
+	return err
+}
