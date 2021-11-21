@@ -11,10 +11,10 @@ import (
 type HttpPortNumber int
 
 // ChatApiServer configures necessary handlers and starts listening on a configured port.
-type ChatApiServer struct {
+type MenuApiServer struct {
 	Port HttpPortNumber
 
-	ChannelsHandler channels.HttpHandlerFunc
+	MenuHandler channels.HttpHandlerFunc
 
 	server *http.Server
 }
