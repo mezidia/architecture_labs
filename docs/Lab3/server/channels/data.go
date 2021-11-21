@@ -2,14 +2,12 @@ package channels
 
 import (
 	"database/sql"
-
-	datab "github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/db"
+	"fmt"
 )
 
-type Dish struct {
-	Id    int64   `json:"id"`
-	Name  string  `json:"name"`
-	Price float32 `json:"price"`
+type Channel struct {
+	Id   int64  `json:"id"`
+	Name string `json:"name"`
 }
 
 type Store struct {
@@ -20,39 +18,32 @@ func NewStore(db *sql.DB) *Store {
 	return &Store{Db: db}
 }
 
-func (s Store) ListMenu() ([]*Dish, error) {
-	conn := &datab.Connection{
-		DbName:     "db_name",
-		User:       "postgres",
-		Password:   "password",
-		Host:       "localhost",
-		DisableSSL: true,
-	}
-	rows, err := conn.SelectAllDishes(s.Db)
+func (s *Store) ListChannels() ([]*Channel, error) {
+	rows, err := s.Db.Query("SELECT id, name FROM channels LIMIT 200")
 	if err != nil {
 		return nil, err
 	}
 
 	defer rows.Close()
 
-	var res []*Dish
+	var res []*Channel
 	for rows.Next() {
-		var c Dish
+		var c Channel
 		if err := rows.Scan(&c.Id, &c.Name); err != nil {
 			return nil, err
 		}
 		res = append(res, &c)
 	}
 	if res == nil {
-		res = make([]*Dish, 0)
+		res = make([]*Channel, 0)
 	}
 	return res, nil
 }
 
-// func (s *Store) CreateChannel(name string) error {
-//     if len(name) < 0 {
-//         return fmt.Errorf("channel name is not provided")
-//     }
-//     , err := s.Db.Exec("INSERT INTO channels (name) VALUES ($1)", name)
-//     return err
-// }
+func (s *Store) CreateChannel(name string) error {
+	if len(name) < 0 {
+		return fmt.Errorf("channel name is not provided")
+	}
+	_, err := s.Db.Exec("INSERT INTO channels (name) VALUES ($1)", name)
+	return err
+}
