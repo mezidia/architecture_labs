@@ -45,12 +45,12 @@ func (c *Connection) InsertOneOrder(db *sql.DB, dishes []int, table int, suma1 f
 	return err
 }
 
-func (c *Connection) SelectAllDishes(db *sql.DB) (*sql.Rows, error) {
+func SelectAllDishes(db *sql.DB) (*sql.Rows, error) {
 	rows, err := db.Query("select * from dishes.dishes")
 	return rows, err
 }
 
-func (c *Connection) SelectAllOrders(db *sql.DB) (*sql.Rows, error) {
+func SelectAllOrders(db *sql.DB) (*sql.Rows, error) {
 	rows, err := db.Query("select * from orders.orders")
 	return rows, err
 }
