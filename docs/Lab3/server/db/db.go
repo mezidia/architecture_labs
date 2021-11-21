@@ -64,3 +64,13 @@ func (c *Connection) SelectOneOrderByID(db *sql.DB, id int) (*sql.Rows, error) {
 	row, err := db.Query("select * from orders.orders where id = $1", id)
 	return row, err
 }
+
+func (c *Connection) UpdateDish(db *sql.DB, fieldName string, value int, id int) error {
+	_, err := db.Exec("update dishes.dishes set "+fieldName+" = $1 where id = $2", value, id)
+	return err
+}
+
+func (c *Connection) UpdateOrder(db *sql.DB, fieldName string, value, id int) error {
+	_, err := db.Exec("update orders.orders set "+fieldName+" = $1 where id = $2", value, id)
+	return err
+}
