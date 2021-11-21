@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/channels"
+	"github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/menu"
 )
 
 type HttpPortNumber int
@@ -14,7 +14,7 @@ type HttpPortNumber int
 type MenuApiServer struct {
 	Port HttpPortNumber
 
-	MenuHandler channels.HttpHandlerFunc
+	MenuHandler menu.HttpHandlerFunc
 
 	server *http.Server
 }
@@ -22,8 +22,8 @@ type MenuApiServer struct {
 // Start will set all handlers and start listening.
 // If this methods succeeds, it does not return until server is shut down.
 // Returned error will never be nil.
-func (s *ChatApiServer) Start() error {
-	if s.ChannelsHandler == nil {
+func (s *MenuApiServer) Start() error {
+	if s.MenuHandler == nil {
 		return fmt.Errorf("channels HTTP handler is not defined - cannot start")
 	}
 	if s.Port == 0 {
@@ -31,7 +31,7 @@ func (s *ChatApiServer) Start() error {
 	}
 
 	handler := new(http.ServeMux)
-	handler.HandleFunc("/channels", s.ChannelsHandler)
+	handler.HandleFunc("/channels", s.MenuHandler)
 
 	s.server = &http.Server{
 		Addr:    fmt.Sprintf(":%d", s.Port),
@@ -42,7 +42,7 @@ func (s *ChatApiServer) Start() error {
 }
 
 // Stops will shut down previously started HTTP server.
-func (s *ChatApiServer) Stop() error {
+func (s *MenuApiServer) Stop() error {
 	if s.server == nil {
 		return fmt.Errorf("server was not started")
 	}
