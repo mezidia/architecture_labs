@@ -32,3 +32,15 @@ func (c *Connection) ConnectionURL() string {
 func (c *Connection) Open() (*sql.DB, error) {
 	return sql.Open("postgres", c.ConnectionURL())
 }
+
+func (c *Connection) InsertOneDish(db *sql.DB, name string, price int) error {
+	_, err := db.Exec("insert into dishes.dishes (name, price) values ($1, $2)",
+		name, price)
+	return err
+}
+
+func (c *Connection) InsertOneOrder(db *sql.DB, dishes []int, table int, suma1 float32, suma2 float32, suma3 float32) error {
+	_, err := db.Exec("insert into orders.orders (dishes, table, suma1, suma2, suma3) values ($1, $2, $3, $4, $5)",
+		dishes, table, suma1, suma2, suma3)
+	return err
+}
