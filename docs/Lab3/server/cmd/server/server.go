@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/menu"
+	mn "github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/menu"
 )
 
 type HttpPortNumber int
@@ -14,7 +14,7 @@ type HttpPortNumber int
 type MenuApiServer struct {
 	Port HttpPortNumber
 
-	MenuHandler menu.HttpHandlerFunc
+	MenuHandler mn.HttpHandlerFunc
 
 	server *http.Server
 }

@@ -5,7 +5,7 @@ package main
 
 import (
 	"github.com/google/wire"
-	"github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/menu"
+	mn "github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/menu"
 )
 
 // ComposeApiServer will create an instance of CharApiServer according to providers defined in this file.
@@ -14,7 +14,7 @@ func ComposeApiServer(port HttpPortNumber) (*MenuApiServer, error) {
 		// DB connection provider (defined in main.go).
 		NewDbConnection,
 		// Add providers from channels package.
-		menu.Providers,
+		mn.Providers,
 		// Provide ChatApiServer instantiating the structure and injecting channels handler and port number.
 		wire.Struct(new(MenuApiServer), "Port", "ChannelsHandler"),
 	)
