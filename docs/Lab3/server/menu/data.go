@@ -2,8 +2,7 @@ package menu
 
 import (
 	"database/sql"
-
-	db_funcs "github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/db"
+	// db_funcs "github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/db"
 )
 
 type Dish struct {
@@ -21,7 +20,7 @@ func NewStore(db *sql.DB) *Store {
 }
 
 func (s *Store) ListMenu() ([]*Dish, error) {
-	rows, err := db_funcs.SelectAllDishes(s.Db)
+	rows, err := s.Db.Query("SELECT id, name FROM dishes")
 	if err != nil {
 		return nil, err
 	}
