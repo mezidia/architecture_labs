@@ -1,14 +1,6 @@
 const request = require('request');
 
 const Client = (baseUrl) => {
-
-    const respHandler = (resp) => {
-        if (resp.ok) {
-            return resp.json();
-        }
-        throw new Error(`Unexpected response from the server ${resp.status} ${resp.statusText}`)
-    };
-
     return {
         get: (path) => {
             return new Promise((resolve, reject) => {
