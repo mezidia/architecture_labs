@@ -2,6 +2,8 @@ package menu
 
 import (
 	"database/sql"
+	"fmt"
+	"strconv"
 
 	db_funcs "github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/db"
 )
@@ -40,4 +42,47 @@ func (s *Store) ListMenu() ([]*Dish, error) {
 		res = make([]*Dish, 0)
 	}
 	return res, nil
+}
+
+var vatPercent = 7.0
+var tipPercent = 3.0
+
+func (s *Store) CreateOrder(id int, table int, dishes []int) error {
+	// price, priceNoVAT and tip will be calculated automatically
+	if (id <= 0) || (table <= 0) {
+		return fmt.Errorf("something wrong with arguments")
+	}
+
+	var sum float64
+
+	for _, dish := range dishes {
+		var c Dish
+		row, err := db_funcs.SelectOneDishByID(s.Db, dish)
+		if err != nil {
+			return err
+		}
+		if err := row.Scan(&c.Id, &c.Name, &c.Price); err != nil {
+			return err
+		}
+		textPrice := fmt.Sprintf("%f", &c.Price)
+		price, err := strconv.ParseFloat(textPrice, 64)
+		sum = sum + price
+	}
+
+	var sumNoVat float64
+	var tip float64
+
+	sumNoVat = GetPercent(float64(vatPercent), sum)
+	tip = GetPercent(float64(tipPercent), sum)
+
+	err := db_funcs.InsertOneOrder(s.Db, id, table, dishes, sum, sumNoVat, tip)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func GetPercent(percent float64, price float64) (priceWithoutPercent float64) {
+	priceWithoutPercent = (percent / price) * 100
+	return priceWithoutPercent
 }

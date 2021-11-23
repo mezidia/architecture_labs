@@ -39,9 +39,10 @@ func InsertOneDish(db *sql.DB, name string, price int) error {
 	return err
 }
 
-func InsertOneOrder(db *sql.DB, dishes []int, table int, suma1 float32, suma2 float32, suma3 float32) error {
-	_, err := db.Exec("INSERT INTO orders (dishes, table, suma1, suma2, suma3) VALUES ($1, $2, $3, $4, $5)",
-		dishes, table, suma1, suma2, suma3)
+func InsertOneOrder(db *sql.DB, id int, table int, dishes []int, sum float64, sumNoVat float64, tip float64) error {
+
+	_, err := db.Exec("INSERT INTO orders (id, dishes, table, sum, sumNoVAT, tip) VALUES ($1, $2, $3, $4, $5)",
+		id, table, dishes, sum, sumNoVat, tip)
 	return err
 }
 
