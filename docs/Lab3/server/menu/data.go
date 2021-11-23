@@ -48,7 +48,6 @@ var vatPercent = 7.0
 var tipPercent = 3.0
 
 func (s *Store) CreateOrder(id int, table int, dishes []int) error {
-	// price, priceNoVAT and tip will be calculated automatically
 	if (id <= 0) || (table <= 0) {
 		return fmt.Errorf("something wrong with arguments")
 	}
@@ -66,6 +65,9 @@ func (s *Store) CreateOrder(id int, table int, dishes []int) error {
 		}
 		textPrice := fmt.Sprintf("%f", &c.Price)
 		price, err := strconv.ParseFloat(textPrice, 64)
+		if err != nil {
+			return nil
+		}
 		sum = sum + price
 	}
 
