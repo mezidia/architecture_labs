@@ -15,6 +15,8 @@ func HttpHandler(store *Store) HttpHandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			handleListMenu(store, rw)
+		} else if r.Method == "POST" {
+
 		} else {
 			rw.WriteHeader(http.StatusMethodNotAllowed)
 		}

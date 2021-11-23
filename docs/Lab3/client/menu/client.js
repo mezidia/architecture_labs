@@ -1,4 +1,4 @@
-const http = require('../common/http');
+const http = require('../common/http.js');
 
 const Client = (baseUrl) => {
 

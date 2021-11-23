@@ -11,7 +11,7 @@ import (
 	"github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/db"
 )
 
-var httpPortNumber = flag.Int("p", 8080, "HTTP port number")
+var httpPortNumber = flag.Int("p", 9080, "HTTP port number")
 
 func NewDbConnection() (*sql.DB, error) {
 	conn := &db.Connection{

@@ -1,18 +1,18 @@
 // This file contains examples of scenarios implementation using
 // the SDK for channels management.
 
-const channels = require('./menu/client');
+const menu = require('./menu/client');
 
-const client = channels.Client('http://localhost:8080');
+const client = menu.Client('http://localhost:9080');
 
 // Scenario 1: Display available channels.
 client.listMenu()
     .then((list) => {
         console.log('=== Scenario 1 ===');
-        console.log('Available channels:');
-        list.forEach((c) => console.log(c.name));
+        console.log('Available dishes:');
+        console.log(list)
     })
     .catch((e) => {
-        console.log(`Problem listing available channels: ${e.message}`);
+        console.log(`Problem listing available dishes: ${e.message}`);
     });
 

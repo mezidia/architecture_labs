@@ -31,7 +31,7 @@ func (s *MenuApiServer) Start() error {
 	}
 
 	handler := new(http.ServeMux)
-	handler.HandleFunc("/channels", s.MenuHandler)
+	handler.HandleFunc("/menu", s.MenuHandler)
 
 	s.server = &http.Server{
 		Addr:    fmt.Sprintf(":%d", s.Port),

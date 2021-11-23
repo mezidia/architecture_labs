@@ -20,7 +20,7 @@ func NewStore(db *sql.DB) *Store {
 }
 
 func (s *Store) ListMenu() ([]*Dish, error) {
-	rows, err := s.Db.Query("SELECT id, name FROM dishes")
+	rows, err := s.Db.Query("SELECT id, name, price FROM dishes")
 	if err != nil {
 		return nil, err
 	}
@@ -30,7 +30,7 @@ func (s *Store) ListMenu() ([]*Dish, error) {
 	var res []*Dish
 	for rows.Next() {
 		var c Dish
-		if err := rows.Scan(&c.Id, &c.Name); err != nil {
+		if err := rows.Scan(&c.Id, &c.Name, &c.Price); err != nil {
 			return nil, err
 		}
 		res = append(res, &c)
