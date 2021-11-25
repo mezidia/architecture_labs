@@ -62,6 +62,11 @@ func SelectOneDishByID(db *sql.DB, id int) (*sql.Rows, error) {
 	return row, err
 }
 
+func SelectOnePriceDishByID(db *sql.DB, id int) (*sql.Rows, error) {
+	row, err := db.Query("SELECT price FROM dishes WHERE id = $1", id)
+	return row, err
+}
+
 func SelectOneOrderByID(db *sql.DB, id int) (*sql.Rows, error) {
 	row, err := db.Query("SELECT * FROM orders WHERE id = $1", id)
 	return row, err

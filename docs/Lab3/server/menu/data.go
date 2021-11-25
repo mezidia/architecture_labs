@@ -52,7 +52,10 @@ var vatPercent = 7.0
 var tipPercent = 3.0
 
 func (s *Store) CreateOrder(id int, table int, dishes []int) error {
-	db_funcs.InsertOneOrder(s.Db, id, table, dishes, 50.0, 50.0, 50.0)
+	price, err := db_funcs.SelectOnePriceDishByID(s.Db, dishes[0])
+	if err != nil {
+	}
+	db_funcs.InsertOneOrder(s.Db, id, table, dishes, float64(price), 50.0, 50.0)
 	return nil
 	// 	if (id <= 0) || (table <= 0) {
 	// 		return fmt.Errorf("something wrong with arguments")
