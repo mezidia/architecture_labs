@@ -18,6 +18,10 @@ type Order struct {
 	Dishes []int `json:"dishes"`
 }
 
+type Price struct {
+	Price float64
+}
+
 type Store struct {
 	Db *sql.DB
 }
@@ -52,10 +56,13 @@ var vatPercent = 7.0
 var tipPercent = 3.0
 
 func (s *Store) CreateOrder(id int, table int, dishes []int) error {
-	price, err := db_funcs.SelectOnePriceDishByID(s.Db, dishes[0])
+	row := db_funcs.SelectOnePriceDishByID(s.Db, dishes[0])
+	pr := Price{}
+	err := row.Scan(&pr.Price)
 	if err != nil {
+		panic(err)
 	}
-	db_funcs.InsertOneOrder(s.Db, id, table, dishes, float64(price), 50.0, 50.0)
+	db_funcs.InsertOneOrder(s.Db, id, table, dishes, pr.Price, 50.0, 50.0)
 	return nil
 	// 	if (id <= 0) || (table <= 0) {
 	// 		return fmt.Errorf("something wrong with arguments")

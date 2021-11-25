@@ -55,22 +55,39 @@ func TestDbConnection_Open(t *testing.T) {
 // 	defer db.Close()
 // }
 
-func TestDbInsertOrder(t *testing.T) {
-	conn := &Connection{
-		DbName:     "Menu",
-		User:       "postgres",
-		Password:   "hogger",
-		Host:       "localhost",
-		DisableSSL: true,
-	}
+// func TestDbInsertOrder(t *testing.T) {
+// 	conn := &Connection{
+// 		DbName:     "Menu",
+// 		User:       "postgres",
+// 		Password:   "hogger",
+// 		Host:       "localhost",
+// 		DisableSSL: true,
+// 	}
 
-	db, _ := conn.Open()
-	err := InsertOneOrder(db, 1, 50, []int{2, 4, 6}, 5.0, 5.0, 5.0)
-	if err != nil {
-		t.Error("Exec failed...")
-	}
-	defer db.Close()
-}
+// 	db, _ := conn.Open()
+// 	err := InsertOneOrder(db, 2, 50, []int{2, 4, 6}, 5.0, 5.0, 5.0)
+// 	if err != nil {
+// 		t.Error("Exec failed...")
+// 	}
+// 	defer db.Close()
+// }
+
+// func TestDbSelectOnePriceDishByID(t *testing.T) {
+// 	conn := &Connection{
+// 		DbName:     "Menu",
+// 		User:       "postgres",
+// 		Password:   "hogger",
+// 		Host:       "localhost",
+// 		DisableSSL: true,
+// 	}
+
+// 	db, _ := conn.Open()
+// 	err := SelectOnePriceDishByID(db, 1)
+// 	if err != nil {
+// 		t.Error("Select error...")
+// 	}
+// 	defer db.Close()
+// }
 
 // func TestDbSelectAllDishes(t *testing.T) {
 // 	conn := &Connection{
