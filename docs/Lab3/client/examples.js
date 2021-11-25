@@ -16,3 +16,14 @@ client.listMenu()
         console.log(`Problem listing available dishes: ${e.message}`);
     });
 
+client.createOrder(1, 50, [1, 2, 3])
+    .then(resp => {
+        console.log('=== Scenario 2 ===');
+        console.log('Added new order status:', resp)
+    })
+
+    .catch(err => {
+        console.log('=== Scenario 2 ===');
+        console.log(`Error trying to set order: ${err}`)
+    });
+

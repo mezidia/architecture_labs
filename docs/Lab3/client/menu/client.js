@@ -6,6 +6,7 @@ const Client = (baseUrl) => {
 
     return {
         listMenu: () => client.get('/menu'),
+        createOrder: (id, table, dishes) => client.post('/menu', { id, table, dishes })
     }
 
 };

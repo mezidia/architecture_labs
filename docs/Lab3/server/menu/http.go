@@ -1,6 +1,7 @@
 package menu
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
@@ -16,7 +17,7 @@ func HttpHandler(store *Store) HttpHandlerFunc {
 		if r.Method == "GET" {
 			handleListMenu(store, rw)
 		} else if r.Method == "POST" {
-
+			handleCreateOrder(r, rw, store)
 		} else {
 			rw.WriteHeader(http.StatusMethodNotAllowed)
 		}
@@ -31,4 +32,20 @@ func handleListMenu(store *Store, rw http.ResponseWriter) {
 		return
 	}
 	tools.WriteJsonOk(rw, res)
+}
+
+func handleCreateOrder(r *http.Request, rw http.ResponseWriter, store *Store) {
+	var c Order
+	if err := json.NewDecoder(r.Body).Decode(&c); err != nil {
+		log.Printf("Error decoding channel input: %s", err)
+		tools.WriteJsonBadRequest(rw, "bad JSON payload")
+		return
+	}
+	err := store.CreateOrder(c.Id, c.Table, c.Dishes)
+	if err == nil {
+		tools.WriteJsonOk(rw, &c)
+	} else {
+		log.Printf("Error inserting record: %s", err)
+		tools.WriteJsonInternalError(rw)
+	}
 }

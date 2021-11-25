@@ -9,9 +9,18 @@ import (
 )
 
 type Dish struct {
-	Id    int64   `json:"id"`
+	Id    int     `json:"id"`
 	Name  string  `json:"name"`
 	Price float64 `json:"price"`
+}
+
+type Order struct {
+	Id       int     `json:"id"`
+	Table    int     `json:"table"`
+	Dishes   []int   `json:"dishes"`
+	Sum      float64 `json:"sum"`
+	SumNoVat float64 `json:"sumNoVat"`
+	Tip      float64 `json:"tip"`
 }
 
 type Store struct {
