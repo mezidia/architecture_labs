@@ -41,9 +41,11 @@ func InsertOneDish(db *sql.DB, name string, price int) error {
 
 func InsertOneOrder(db *sql.DB, id int, table int, dishes []int, sum float64, sumNoVat float64, tip float64) error {
 
-	_, err := db.Exec("INSERT INTO orders (id, table, dishes, sum, sumNoVat, tip) VALUES ($1, $2, $3, $4, $5, $6)", id, table, pq.Array(dishes), sum, sumNoVat, tip)
+	_, err := db.Exec("INSERT INTO orders (id, table_id, dishes, order_sum, sum_no_vat, tip) VALUES ($1, $2, $3, $4, $5, $6)", id, table, pq.Array(dishes), sum, sumNoVat, tip)
 	return err
 }
+
+// For function
 
 func SelectAllDishes(db *sql.DB) (*sql.Rows, error) {
 	rows, err := db.Query("SELECT * FROM dishes")

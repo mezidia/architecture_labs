@@ -1,7 +1,6 @@
 package db
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -67,7 +66,6 @@ func TestDbInsertOrder(t *testing.T) {
 
 	db, _ := conn.Open()
 	err := InsertOneOrder(db, 1, 50, []int{2, 4, 6}, 5.0, 5.0, 5.0)
-	fmt.Println(err)
 	if err != nil {
 		t.Error("Exec failed...")
 	}
