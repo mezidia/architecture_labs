@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"net/url"
 
-	_ "github.com/lib/pq"
+	pq "github.com/lib/pq"
 )
 
 type Connection struct {
@@ -41,8 +41,7 @@ func InsertOneDish(db *sql.DB, name string, price int) error {
 
 func InsertOneOrder(db *sql.DB, id int, table int, dishes []int, sum float64, sumNoVat float64, tip float64) error {
 
-	_, err := db.Exec("INSERT INTO orders (id, dishes, table, sum, sumNoVAT, tip) VALUES ($1, $2, $3, $4, $5)",
-		id, table, dishes, sum, sumNoVat, tip)
+	_, err := db.Exec("INSERT INTO orders (id, table, dishes, sum, sumNoVat, tip) VALUES ($1, $2, $3, $4, $5, $6)", id, table, pq.Array(dishes), sum, sumNoVat, tip)
 	return err
 }
 

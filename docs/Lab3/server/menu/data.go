@@ -69,8 +69,10 @@ func (s *Store) CreateOrder(id int, table int, dishes []int) error {
 		if err != nil {
 			return err
 		}
-		if err := row.Scan(&c.Id, &c.Name, &c.Price); err != nil {
-			return err
+		for row.Next() {
+			if err := row.Scan(&c.Id, &c.Name, &c.Price); err != nil {
+				return err
+			}
 		}
 		textPrice := fmt.Sprintf("%f", &c.Price)
 		price, err := strconv.ParseFloat(textPrice, 64)
