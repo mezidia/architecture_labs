@@ -58,6 +58,7 @@ func (s *Store) ListMenu() ([]*Dish, error) {
 
 func (s *Store) CreateOrder(id int, table int, dishes []int) error {
 	var sum float64
+
 	for _, v := range dishes {
 		row := db_funcs.SelectOnePriceDishByID(s.Db, v)
 		pr := Price{}
@@ -68,30 +69,32 @@ func (s *Store) CreateOrder(id int, table int, dishes []int) error {
 		sum += pr.Price
 	}
 
-	var sumNoVat float64
-	var tip float64
-
-	sumNoVat = GetSumNoVat(sum)
-	tip = GetTip(sum)
+	sumNoVat := GetSumNoVat(sum)
+	tip := GetTip(sum)
 
 	db_funcs.InsertOneOrder(s.Db, id, table, dishes, sum, sumNoVat, tip)
 	return nil
 }
 
-func GetSumNoVat(sumNoVat float64) (sum float64) {
-	pricePercent := (sumNoVat / 100) * vatPercent
-	sum = sumNoVat - pricePercent
+func GetSumNoVat(sum float64) (roundedPrice float64) {
+	priceSum := (sum / 100) * vatPercent
+	sumNoVat := sum - priceSum
 
-	return math.Round(sum*100) / 100
+	roundedPrice = RoundPrice(sumNoVat)
+
+	return roundedPrice
 }
 
-func GetTip(tip float64) (sum float64) {
-	tipPercent := (tip / 100) * tipPercent
+func GetTip(sum float64) (roundedTip float64) {
+	tipSum := (sum / 100) * tipPercent
 
-	return math.Round(tipPercent*100) / 100
+	roundedTip = RoundPrice(tipSum)
+
+	return roundedTip
 }
 
-// func RoundPrice(float64) (sum float64) {
-// 	roundedSum := math.Round(sum*100) / 100
-// 	return roundedSum
-// }
+func RoundPrice(sum float64) (roundedSum float64) {
+	roundedSum = math.Round(sum*100) / 100
+
+	return roundedSum
+}
