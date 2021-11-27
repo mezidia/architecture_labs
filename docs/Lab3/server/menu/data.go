@@ -2,6 +2,7 @@ package menu
 
 import (
 	"database/sql"
+	"math"
 
 	db_funcs "github.com/mezidia/architecture_labs/tree/main/docs/Lab3/server/db"
 )
@@ -80,10 +81,17 @@ func (s *Store) CreateOrder(id int, table int, dishes []int) error {
 func GetSumNoVat(sumNoVat float64) (sum float64) {
 	pricePercent := (sumNoVat / 100) * vatPercent
 	sum = sumNoVat - pricePercent
-	return sum
+
+	return math.Round(sum*100) / 100
 }
 
 func GetTip(tip float64) (sum float64) {
 	tipPercent := (tip / 100) * tipPercent
-	return tipPercent
+
+	return math.Round(tipPercent*100) / 100
 }
+
+// func RoundPrice(float64) (sum float64) {
+// 	roundedSum := math.Round(sum*100) / 100
+// 	return roundedSum
+// }
