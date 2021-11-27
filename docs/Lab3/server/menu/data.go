@@ -68,12 +68,12 @@ func (s *Store) CreateOrder(id int, table int, dishes []int) error {
 	}
 
 	var sumNoVat float64
-	var tip float64
+	//var tip float64
 
-	sumNoVat = GetPercent(float64(vatPercent), sum)
-	tip = GetPercent(float64(tipPercent), sum)
+	sumNoVat = GetSumNoVat(sum)
+	// tip = GetPercent(float64(tipPercent), sum)
 
-	db_funcs.InsertOneOrder(s.Db, id, table, dishes, sum, sumNoVat, tip)
+	db_funcs.InsertOneOrder(s.Db, id, table, dishes, sum, sumNoVat, 50.0)
 	return nil
 	// 	if (id <= 0) || (table <= 0) {
 	// 		return fmt.Errorf("something wrong with arguments")
@@ -115,8 +115,14 @@ func (s *Store) CreateOrder(id int, table int, dishes []int) error {
 
 }
 
-func GetPercent(percent float64, price float64) (priceWithoutPercent float64) {
-	pricePercent := (price / 100) * percent
-	priceWithoutPercent = price - pricePercent
-	return priceWithoutPercent
+func GetSumNoVat(sumNoVat float64) (sum float64) {
+	pricePercent := (sumNoVat / 100) * vatPercent
+	sum = sumNoVat - pricePercent
+	return sum
 }
+
+// func GetTip(tip float64) (sum float64) {
+// 	tipPercent := (tip / 100) * vatPercent
+// 	sum = sumNoVat - pricePercent
+// 	return sum
+// }
