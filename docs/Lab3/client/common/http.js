@@ -1,10 +1,10 @@
-const request = require('request');
+import request from 'request';
 
 const Client = (baseUrl) => {
     return {
         get: (path) => {
             return new Promise((resolve, reject) => {
-                request(`${baseUrl}${path}`, {json: true}, (err, res, body) => {
+                request(`${baseUrl}${path}`, { json: true }, (err, res, body) => {
                     if (err) {
                         reject(err);
                         return;
@@ -13,9 +13,9 @@ const Client = (baseUrl) => {
                 });
             });
         },
-        post: async (path, data) => {
+        post: async(path, data) => {
             return new Promise((resolve, reject) => {
-                request(`${baseUrl}${path}`, {json: true, method: 'POST', body: data}, (err, res, body) => {
+                request(`${baseUrl}${path}`, { json: true, method: 'POST', body: data }, (err, res, body) => {
                     if (err) {
                         reject(err);
                         return;
@@ -27,4 +27,4 @@ const Client = (baseUrl) => {
     };
 };
 
-module.exports = { Client };
+export default { Client };

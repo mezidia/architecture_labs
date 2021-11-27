@@ -1,8 +1,8 @@
-const http = require('../common/http.js');
+import { Client as _Client } from '../common/http.js';
 
 const Client = (baseUrl) => {
 
-    const client = http.Client(baseUrl);
+    const client = _Client(baseUrl);
 
     return {
         listMenu: () => client.get('/menu'),
@@ -11,4 +11,4 @@ const Client = (baseUrl) => {
 
 };
 
-module.exports = { Client };
+export default { Client };

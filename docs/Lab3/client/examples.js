@@ -1,11 +1,7 @@
-// This file contains examples of scenarios implementation using
-// the SDK for channels management.
+import { Client } from './menu/client';
 
-const menu = require('./menu/client');
+const client = Client('http://localhost:9080');
 
-const client = menu.Client('http://localhost:9080');
-
-// Scenario 1: Display available channels.
 client.listMenu()
     .then((list) => {
         console.log('=== Scenario 1 ===');
@@ -22,8 +18,7 @@ client.createOrder(1, 50, [2, 1, 3])
         console.log('Added new order status:', resp)
     })
 
-    .catch(err => {
-        console.log('=== Scenario 2 ===');
-        console.log(`Error trying to set order: ${err}`)
-    });
-
+.catch(err => {
+    console.log('=== Scenario 2 ===');
+    console.log(`Error trying to set order: ${err}`)
+});

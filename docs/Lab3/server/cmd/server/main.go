@@ -25,14 +25,11 @@ func NewDbConnection() (*sql.DB, error) {
 }
 
 func main() {
-	// Parse command line arguments. Port number may be defined with "-p" flag.
 	flag.Parse()
 
-	// Create the server.
 	if server, err := ComposeApiServer(HttpPortNumber(*httpPortNumber)); err == nil {
-		// Start it.
 		go func() {
-			log.Println("Starting chat server...")
+			log.Println("Starting Restaurant server...")
 
 			err := server.Start()
 			if err == http.ErrServerClosed {
@@ -42,7 +39,6 @@ func main() {
 			}
 		}()
 
-		// Wait for Ctrl-C signal.
 		sigChannel := make(chan os.Signal, 1)
 		signal.Notify(sigChannel, os.Interrupt)
 		<-sigChannel

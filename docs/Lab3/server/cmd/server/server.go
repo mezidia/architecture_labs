@@ -10,7 +10,6 @@ import (
 
 type HttpPortNumber int
 
-// ChatApiServer configures necessary handlers and starts listening on a configured port.
 type MenuApiServer struct {
 	Port HttpPortNumber
 
@@ -19,9 +18,6 @@ type MenuApiServer struct {
 	server *http.Server
 }
 
-// Start will set all handlers and start listening.
-// If this methods succeeds, it does not return until server is shut down.
-// Returned error will never be nil.
 func (s *MenuApiServer) Start() error {
 	if s.MenuHandler == nil {
 		return fmt.Errorf("channels HTTP handler is not defined - cannot start")
@@ -41,7 +37,6 @@ func (s *MenuApiServer) Start() error {
 	return s.server.ListenAndServe()
 }
 
-// Stops will shut down previously started HTTP server.
 func (s *MenuApiServer) Stop() error {
 	if s.server == nil {
 		return fmt.Errorf("server was not started")
