@@ -14,7 +14,6 @@ type Dish struct {
 }
 
 type Order struct {
-	Id     int   `json:"id"`
 	Table  int   `json:"table_id"`
 	Dishes []int `json:"dishes"`
 }
@@ -56,7 +55,7 @@ func (s *Store) ListMenu() ([]*Dish, error) {
 	return res, nil
 }
 
-func (s *Store) CreateOrder(id int, table int, dishes []int) error {
+func (s *Store) CreateOrder(table int, dishes []int) error {
 	var sum float64
 
 	for _, v := range dishes {
@@ -72,7 +71,7 @@ func (s *Store) CreateOrder(id int, table int, dishes []int) error {
 	sumNoVat := GetSumNoVat(sum)
 	tip := GetTip(sum)
 
-	db_funcs.InsertOneOrder(s.Db, id, table, dishes, sum, sumNoVat, tip)
+	db_funcs.InsertOneOrder(s.Db, table, dishes, sum, sumNoVat, tip)
 	return nil
 }
 

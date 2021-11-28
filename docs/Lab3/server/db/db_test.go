@@ -65,7 +65,7 @@ func TestDbInsertOrder(t *testing.T) {
 	}
 
 	db, _ := conn.Open()
-	err := InsertOneOrder(db, 1, 50, []int{2, 4, 6}, 5.0, 5.0, 5.0)
+	err := InsertOneOrder(db, 50, []int{2, 4, 6}, 5.0, 5.0, 5.0)
 	if err != nil {
 		t.Error("Exec failed...")
 	}

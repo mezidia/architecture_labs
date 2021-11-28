@@ -39,7 +39,7 @@ func handleCreateOrder(r *http.Request, rw http.ResponseWriter, store *Store) {
 		tools.WriteJsonBadRequest(rw, "bad JSON payload")
 		return
 	}
-	err := store.CreateOrder(c.Id, c.Table, c.Dishes)
+	err := store.CreateOrder(c.Table, c.Dishes)
 	if err == nil {
 		tools.WriteJsonOk(rw, &c)
 	} else {
