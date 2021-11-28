@@ -17,8 +17,17 @@ client.createOrder(1, 50, [2, 1, 3])
         console.log('=== Scenario 2 ===');
         console.log('Added new order status:', resp)
     })
-
-.catch(err => {
+    .catch(err => {
     console.log('=== Scenario 2 ===');
+    console.log(`Error trying to set order: ${err}`)
+});
+
+client.createOrder(2, 18, [7, 7, 2, 3])
+    .then(resp => {
+        console.log('=== Scenario 3 ===');
+        console.log('Added new order status:', resp)
+    })
+    .catch(err => {
+    console.log('=== Scenario 3 ===');
     console.log(`Error trying to set order: ${err}`)
 });
