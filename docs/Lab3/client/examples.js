@@ -1,6 +1,6 @@
-import { Client } from './menu/client';
+const menu = require('./menu/client');
 
-const client = Client('http://localhost:9080');
+const client = menu.Client('http://localhost:9080');
 
 client.listMenu()
     .then((list) => {
