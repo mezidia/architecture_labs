@@ -31,3 +31,13 @@ client.createOrder(2, 18, [7, 7, 2, 3])
     console.log('=== Scenario 3 ===');
     console.log(`Error trying to set order: ${err}`)
 });
+
+client.createOrder(3, 3, [5])
+    .then(resp => {
+        console.log('=== Scenario 4 ===');
+        console.log('Added new order status:', resp)
+    })
+    .catch(err => {
+    console.log('=== Scenario 4 ===');
+    console.log(`Error trying to set order: ${err}`)
+});
