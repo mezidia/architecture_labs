@@ -10,7 +10,7 @@ client.listMenu()
     })
     .catch((e) => {
         console.log(`Problem listing available dishes: ${e.message}`);
-    });
+});
 
 client.createOrder(50, [2, 1, 3])
     .then(resp => {

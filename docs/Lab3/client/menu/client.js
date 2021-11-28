@@ -8,7 +8,6 @@ const Client = (baseUrl) => {
         listMenu: () => client.get('/menu'),
         createOrder: (table_id, dishes) => client.post('/menu', { table_id, dishes })
     }
-
 };
 
 module.exports = { Client };
