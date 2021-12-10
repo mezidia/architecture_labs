@@ -1,5 +1,9 @@
 package main
 
+import (
+	"time"
+)
+
 type Command interface {
 	Execute(handler Handler)
 }
@@ -25,6 +29,9 @@ func (q *commandsQueue) pull() Command {
 
 type Loop struct {
 	queue *commandsQueue
+
+	stopRequest bool
+	stopConfirm chan struct{}
 }
 
 func (l *Loop) Post(cmd Command) {
@@ -33,16 +40,20 @@ func (l *Loop) Post(cmd Command) {
 
 func (l *Loop) Start() {
 	l.queue = &commandsQueue{}
+	l.stopConfirm = make(chan struct{})
 	go func() {
 		for {
+			// TODO: Respect stopRequest and message queue empty state.
 			cmd := l.queue.pull()
 			cmd.Execute(l)
 		}
+		l.stopConfirm <- struct{}{}
 	}()
 }
 
 func (l *Loop) AwaitFinish() {
-
+	l.stopRequest = true
+	<-l.stopConfirm
 }
 
 func main() {
@@ -52,6 +63,10 @@ func main() {
 	loop.Start()
 
 	loop.Post(&printCommand{arg: "hello"})
+
+	loop.Post(&addCommand{a: 4, b: 5})
+
+	time.Sleep(1 * time.Second)
 
 	loop.AwaitFinish()
 
