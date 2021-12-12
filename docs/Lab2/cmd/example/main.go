@@ -41,6 +41,7 @@ func main() {
 			if err != nil {
 				os.Stderr.WriteString(err.Error())
 			}
+			defer outputToFile.Close()
 			output = outputToFile
 		} else {
 			output = os.Stdout
