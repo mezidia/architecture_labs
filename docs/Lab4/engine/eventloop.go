@@ -15,28 +15,47 @@ func (q *commandsQueue) pull() Command {
 	return res
 }
 
-type Loop struct {
-	queue *commandsQueue
+func (q *commandsQueue) size() int {
+	return len(q.c)
+}
 
-	stopRequest bool
-	stopConfirm chan struct{}
+type Loop struct {
+	queue       *commandsQueue
+	stopConfirm chan bool
+
+	stopRequest  bool
+	pauseRequest bool
 }
 
 func (l *Loop) Post(cmd Command) {
 	l.queue.push(cmd)
+	if l.pauseRequest && !l.stopRequest {
+		l.Routine()
+	}
+}
+
+func (l *Loop) Routine() {
+	l.pauseRequest = false
+	go func() {
+		for {
+			if l.queue.size() > 0 {
+				cmd := l.queue.pull()
+				cmd.Execute(l)
+			} else if l.stopRequest {
+				l.stopConfirm <- true
+				return
+			} else {
+				l.pauseRequest = true
+				return
+			}
+		}
+	}()
 }
 
 func (l *Loop) Start() {
 	l.queue = &commandsQueue{}
-	l.stopConfirm = make(chan struct{})
-	go func() {
-		for {
-			// TODO: Respect stopRequest and message queue empty state.
-			cmd := l.queue.pull()
-			cmd.Execute(l)
-		}
-		l.stopConfirm <- struct{}{}
-	}()
+	l.stopConfirm = make(chan bool, 1)
+	l.Routine()
 }
 
 func (l *Loop) AwaitFinish() {

@@ -13,19 +13,19 @@ type Handler interface {
 	Post(cmd Command)
 }
 
-type printCommand struct {
-	arg string
+type PrintCommand struct {
+	Arg string
 }
 
-func (pc *printCommand) Execute(handler Handler) {
-	fmt.Println(pc.arg)
+func (pc *PrintCommand) Execute(handler Handler) {
+	fmt.Println(pc.Arg)
 }
 
-type addCommand struct {
-	a, b int
+type AddCommand struct {
+	A, B int
 }
 
-func (ac *addCommand) Execute(handler Handler) {
-	res := ac.a + ac.b
-	handler.Post(&printCommand{arg: strconv.Itoa(res)})
+func (ac *AddCommand) Execute(handler Handler) {
+	res := ac.A + ac.B
+	handler.Post(&PrintCommand{Arg: strconv.Itoa(res)})
 }
