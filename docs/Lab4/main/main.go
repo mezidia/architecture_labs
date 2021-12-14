@@ -9,6 +9,12 @@ import (
 	"github.com/mezidia/architecture_labs/tree/main/docs/Lab4/engine"
 )
 
+var (
+	printError   = "Something wrong Happend with Print command initialization"
+	addError     = "Something wrong Happend with Add command initialization"
+	commandError = "Something wrong Happend with command initialization"
+)
+
 func main() {
 
 	loop := new(engine.Loop)
@@ -36,14 +42,14 @@ func parse(command string) engine.Command {
 	} else if parts[0] == "add" {
 		firstNum, err := strconv.Atoi(parts[1])
 		if err != nil {
-			return (&engine.PrintCommand{Arg: "Something wrong Happend with Print command initialization"})
+			return (&engine.PrintCommand{Arg: printError})
 		}
 		secondNum, err := strconv.Atoi(parts[2])
 		if err != nil {
-			return (&engine.PrintCommand{Arg: "Something wrong Happend with Add command initialization"})
+			return (&engine.PrintCommand{Arg: addError})
 		}
 		return (&engine.AddCommand{A: firstNum, B: secondNum})
 	} else {
-		return (&engine.PrintCommand{Arg: "Something wrong Happend with command initialization"})
+		return (&engine.PrintCommand{Arg: commandError})
 	}
 }
