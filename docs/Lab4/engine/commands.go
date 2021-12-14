@@ -1,9 +1,17 @@
-package main
+package engine
 
 import (
 	"fmt"
 	"strconv"
 )
+
+type Command interface {
+	Execute(handler Handler)
+}
+
+type Handler interface {
+	Post(cmd Command)
+}
 
 type printCommand struct {
 	arg string
