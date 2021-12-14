@@ -2,11 +2,13 @@ package main
 
 import (
 	"time"
+
+	"github.com/mezidia/architecture_labs/tree/main/docs/Lab4/engine"
 )
 
 func main() {
 
-	loop := new(Loop)
+	loop := new(engine.Loop)
 
 	loop.Start()
 
