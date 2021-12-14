@@ -10,7 +10,6 @@ import (
 )
 
 var (
-	loopEnd      = "Should end!"
 	inputFile    = "examples.txt"
 	syntaxError  = "SYNTAX ERROR: "
 	commandError = "unknown command"
@@ -34,7 +33,6 @@ func main() {
 	}
 
 	loop.AwaitFinish()
-	loop.Post(&engine.PrintCommand{Arg: loopEnd})
 }
 
 func parse(command string) engine.Command {

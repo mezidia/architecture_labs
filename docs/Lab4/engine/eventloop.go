@@ -15,10 +15,6 @@ func (q *commandsQueue) pull() Command {
 	return res
 }
 
-func (q *commandsQueue) size() int {
-	return len(q.c)
-}
-
 type Loop struct {
 	queue       *commandsQueue
 	stopConfirm chan bool
@@ -38,7 +34,7 @@ func (l *Loop) Routine() {
 	l.pauseRequest = false
 	go func() {
 		for {
-			if l.queue.size() > 0 {
+			if len(l.queue.c) > 0 {
 				cmd := l.queue.pull()
 				cmd.Execute(l)
 			} else if l.stopRequest {
