@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -37,14 +36,14 @@ func parse(command string) engine.Command {
 	} else if parts[0] == "add" {
 		firstNum, err := strconv.Atoi(parts[1])
 		if err != nil {
-			fmt.Println(err)
+			return (&engine.PrintCommand{Arg: "Something wrong Happend with Print command initialization"})
 		}
 		secondNum, err := strconv.Atoi(parts[2])
 		if err != nil {
-			fmt.Println(err)
+			return (&engine.PrintCommand{Arg: "Something wrong Happend with Add command initialization"})
 		}
 		return (&engine.AddCommand{A: firstNum, B: secondNum})
 	} else {
-		return (&engine.PrintCommand{Arg: "Something wrong Happend"})
+		return (&engine.PrintCommand{Arg: "Something wrong Happend with command initialization"})
 	}
 }
