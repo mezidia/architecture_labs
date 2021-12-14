@@ -10,11 +10,12 @@ import (
 )
 
 var (
-	inputFile    = "examples.txt"
-	syntaxError  = "SYNTAX ERROR: "
-	commandError = "unknown command"
-	printCommand = "print"
-	addCommand   = "add"
+	inputFile      = "examples.txt"
+	syntaxError    = "SYNTAX ERROR: "
+	commandError   = "unknown command"
+	emptyLineError = "empty line"
+	printCommand   = "print"
+	addCommand     = "add"
 )
 
 func main() {
@@ -36,7 +37,12 @@ func main() {
 }
 
 func parse(command string) engine.Command {
+	if len(command) <= 0 {
+		return (&engine.PrintCommand{Arg: emptyLineError})
+	}
+
 	parts := strings.Fields(command)
+
 	if parts[0] == printCommand {
 		return (&engine.PrintCommand{Arg: parts[1]})
 	} else if parts[0] == addCommand {
