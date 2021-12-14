@@ -10,9 +10,12 @@ import (
 )
 
 var (
-	printError   = "Something wrong Happend with Print command initialization"
-	addError     = "Something wrong Happend with Add command initialization"
+	loopEnd      = "Should end!"
+	inputFile    = "examples.txt"
+	syntaxError  = "SYNTAX ERROR: "
 	commandError = "Something wrong Happend with command initialization"
+	printCommand = "print"
+	addCommand   = "add"
 )
 
 func main() {
@@ -20,7 +23,6 @@ func main() {
 	loop := new(engine.Loop)
 
 	loop.Start()
-	inputFile := "examples.txt"
 	if input, err := os.Open(inputFile); err == nil {
 		defer input.Close()
 		scanner := bufio.NewScanner(input)
@@ -32,21 +34,21 @@ func main() {
 	}
 
 	loop.AwaitFinish()
-	loop.Post(&engine.PrintCommand{Arg: "Should end!"})
+	loop.Post(&engine.PrintCommand{Arg: loopEnd})
 }
 
 func parse(command string) engine.Command {
 	parts := strings.Fields(command)
-	if parts[0] == "print" {
+	if parts[0] == printCommand {
 		return (&engine.PrintCommand{Arg: parts[1]})
-	} else if parts[0] == "add" {
+	} else if parts[0] == addCommand {
 		firstNum, err := strconv.Atoi(parts[1])
 		if err != nil {
-			return (&engine.PrintCommand{Arg: printError})
+			return (&engine.PrintCommand{Arg: syntaxError + err.Error()})
 		}
 		secondNum, err := strconv.Atoi(parts[2])
 		if err != nil {
-			return (&engine.PrintCommand{Arg: addError})
+			return (&engine.PrintCommand{Arg: syntaxError + err.Error()})
 		}
 		return (&engine.AddCommand{A: firstNum, B: secondNum})
 	} else {
