@@ -13,7 +13,7 @@ var (
 	loopEnd      = "Should end!"
 	inputFile    = "examples.txt"
 	syntaxError  = "SYNTAX ERROR: "
-	commandError = "Something wrong Happend with command initialization"
+	commandError = "unknown command"
 	printCommand = "print"
 	addCommand   = "add"
 )
