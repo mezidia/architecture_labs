@@ -1,17 +1,24 @@
 package engine
 
+import "sync"
+
 type commandsQueue struct {
+	sync.Mutex
 	c []Command
 }
 
 func (q *commandsQueue) push(cmd Command) {
+	q.Lock()
 	q.c = append(q.c, cmd)
+	q.Unlock()
 }
 
 func (q *commandsQueue) pull() Command {
+	q.Lock()
 	res := q.c[0]
 	q.c[0] = nil
 	q.c = q.c[1:]
+	q.Unlock()
 	return res
 }
 
@@ -50,7 +57,7 @@ func (l *Loop) Routine() {
 
 func (l *Loop) Start() {
 	l.queue = &commandsQueue{}
-	l.stopConfirm = make(chan bool, 1)
+	l.stopConfirm = make(chan bool)
 	l.Routine()
 }
 
