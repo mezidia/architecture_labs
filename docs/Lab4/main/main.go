@@ -46,13 +46,13 @@ func parse(command string) engine.Command {
 	if parts[0] == printCommand {
 		return (&engine.PrintCommand{Arg: parts[1]})
 	} else if parts[0] == addCommand {
-		firstNum, err := strconv.Atoi(parts[1])
-		if err != nil {
-			return (&engine.PrintCommand{Arg: syntaxError + err.Error()})
+		firstNum, firstNumErr := strconv.Atoi(parts[1])
+		if firstNumErr != nil {
+			return (&engine.PrintCommand{Arg: syntaxError + firstNumErr.Error()})
 		}
-		secondNum, err := strconv.Atoi(parts[2])
-		if err != nil {
-			return (&engine.PrintCommand{Arg: syntaxError + err.Error()})
+		secondNum, secondNumErr := strconv.Atoi(parts[2])
+		if secondNumErr != nil {
+			return (&engine.PrintCommand{Arg: syntaxError + secondNumErr.Error()})
 		}
 		return (&engine.AddCommand{A: firstNum, B: secondNum})
 	} else {
