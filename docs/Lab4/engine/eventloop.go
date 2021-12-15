@@ -41,16 +41,16 @@ func (l *Loop) Routine() {
 	l.pauseRequest = false
 	go func() {
 		for {
-			if len(l.queue.c) > 0 {
-				cmd := l.queue.pull()
-				cmd.Execute(l)
-			} else if l.stopRequest {
-				l.stopConfirm <- true
-				return
-			} else {
+			var queueLength = len(l.queue.c)
+			if queueLength > 0 {
+				commandOp := l.queue.pull()
+				commandOp.Execute(l)
+			} else if !l.stopRequest {
 				l.pauseRequest = true
 				return
 			}
+			l.stopConfirm <- true
+			return
 		}
 	}()
 }
