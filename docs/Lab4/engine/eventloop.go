@@ -48,9 +48,10 @@ func (l *Loop) Routine() {
 			} else if !l.stopRequest {
 				l.pauseRequest = true
 				return
+			} else {
+				l.stopConfirm <- true
+				return
 			}
-			l.stopConfirm <- true
-			return
 		}
 	}()
 }
