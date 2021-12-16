@@ -4,4 +4,4 @@ add 7 8
 add 5 8
 add 7 5
 add 4 text
-print hello
+print hello world

@@ -16,6 +16,7 @@ var (
 	emptyLineError = "empty line"
 	printCommand   = "print"
 	addCommand     = "add"
+	excessiveError = "excessive argument"
 )
 
 func main() {
@@ -43,6 +44,9 @@ func parse(command string) engine.Command {
 	parts := strings.Fields(command)
 
 	if parts[0] == printCommand {
+		if len(parts) > 2 {
+			return (&engine.PrintCommand{Arg: syntaxError + excessiveError})
+		}
 		return (&engine.PrintCommand{Arg: parts[1]})
 	} else if parts[0] == addCommand {
 		firstNum, firstNumErr := strconv.Atoi(parts[1])
