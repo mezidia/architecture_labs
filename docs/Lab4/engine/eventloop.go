@@ -43,8 +43,8 @@ func (l *Loop) Routine() {
 		for {
 			var queueLength = len(l.queue.c)
 			if queueLength > 0 {
-				commandOp := l.queue.pull()
-				commandOp.Execute(l)
+				cmd := l.queue.pull()
+				cmd.Execute(l)
 			} else if !l.stopRequest {
 				l.pauseRequest = true
 				return
