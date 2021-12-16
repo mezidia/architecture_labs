@@ -19,10 +19,9 @@ var (
 )
 
 func main() {
-
 	loop := new(engine.Loop)
-
 	loop.Start()
+
 	if input, err := os.Open(inputFile); err == nil {
 		defer input.Close()
 		scanner := bufio.NewScanner(input)
@@ -55,7 +54,7 @@ func parse(command string) engine.Command {
 			return (&engine.PrintCommand{Arg: syntaxError + secondNumErr.Error()})
 		}
 		return (&engine.AddCommand{A: firstNum, B: secondNum})
-	} else {
-		return (&engine.PrintCommand{Arg: commandError})
 	}
+
+	return (&engine.PrintCommand{Arg: commandError})
 }
