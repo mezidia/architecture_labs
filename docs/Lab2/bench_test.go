@@ -12,9 +12,9 @@ var (
 func BenchmarkPrefix(b *testing.B) {
 	iterationsNum := 0
 
-	for k := 0; k < 20; k++ {
+	for k := 0; k < 25; k++ {
 		input := startStatement
-		iterationsNum += 2000
+		iterationsNum += 2500
 
 		for i := 0; i < iterationsNum; i++ {
 			input = "+ " + input
