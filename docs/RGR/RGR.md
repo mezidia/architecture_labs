@@ -18,15 +18,8 @@
 
 ### Зміст
 
-- [Django](https://www.djangoproject.com/)
-- [NumPy](https://numpy.org/)
-- [TensorFlow](https://www.tensorflow.org/)
-- [aiogram](https://github.com/aiogram/aiogram)
-- [python-dotenv](https://pypi.org/project/python-dotenv/)
-- [React Native](https://reactnative.dev/)
-- [pandas](https://pandas.pydata.org/)
-- [discord.py](https://discordpy.readthedocs.io/en/stable/)
-- [Docker](https://www.docker.com/)
+- [Завдання](#Завдання)
+- [2-га робота](#Завдання)
 
 ### Завдання
 
