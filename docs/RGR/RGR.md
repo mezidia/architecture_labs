@@ -44,4 +44,57 @@
 
 Щоб підтвердити лінійний час виконання даної функції, ми підготуємо бенчмарк для неї, запускаючи функцію для даних різного розміру (постійно їх збільшуючи)
 
-Код нижче запускає функцію **Prefix** 25 разів, передаючи їй вхідний рядок різного розміру. Кожен запуск оформлено у вигляді окремого дочірнього бенчмарка, що дає можливість отримати середній час виконання функції для кожного з розмірів
+[Код нижче](https://github.com/mezidia/architecture_labs/blob/main/docs/Lab2/bench_test.go) запускає функцію **[Prefix](https://github.com/mezidia/architecture_labs/blob/main/docs/Lab2/implementation.go)** 25 разів, передаючи їй вхідний рядок різного розміру. Кожен запуск оформлено у вигляді окремого дочірнього бенчмарка, що дає можливість отримати середній час виконання функції для кожного з розмірів
+
+Результат виконаня та помилка функції зберігається у глобальних змінних пакет та err. Їх єдине призначення - уникнути оптимізації компілятора
+
+```go
+package lab2
+
+import (
+	"fmt"
+	"testing"
+)
+
+var startStatement string = "+ - / * 1 2 3 4 5"
+var cntRes int
+var err error
+
+func BenchmarkPrefix(b *testing.B) {
+	const baseLength = 2500
+
+	for i := 0; i < 25; i++ {
+		input := startStatement
+		iterationsNum := baseLength * (i + 1)
+
+		for j := 0; j < iterationsNum; j++ {
+			input = "+ " + input
+			input = input + " "
+			input = input + startStatement
+		}
+
+		b.Run(fmt.Sprintf("len=%d", iterationsNum), func(b *testing.B) {
+			cntRes, err = Prefix(input)
+		})
+	}
+}
+
+```
+
+---
+
+Ми маємо певний початковий вираз "+ - / * 1 2 3 4 5", який будемо повторювати N разів та передавати як аргумент до методу Prefix. Початковим N було обрано 2500, оскільки при меншій к-сті на деяких ітераціях усе відбувається швидко і ми не отримуємо результати. Як, наприклад, тут, де baseLength = 500:
+
+![BadExample](/RGR/Lab-2-Bench-Bad-Example.png)
+
+---
+
+Запуск бенчмарка дає нам такі результати:
+
+![Benchmark-Lab2](/RGR/Lab-2-Bench-With-Optimization.png)
+
+---
+
+Якщо перенести ці дані та відобразити їх на графіку, то отримаємо таку картину:
+
+![Benchmark-Graph-Lab2](/RGR/Lab-2-BenchGraph-With-Optimization.png)
