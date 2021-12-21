@@ -9,26 +9,24 @@ var (
 	startStatement = "+ - / * 1 2 3 4 5"
 )
 
+var cntRes int
+var err error
+
 func BenchmarkPrefix(b *testing.B) {
-	iterationsNum := 0
+	const baseLength = 2500
 
-	for k := 0; k < 25; k++ {
+	for i := 0; i < 25; i++ {
 		input := startStatement
-		iterationsNum += 2500
+		iterationsNum := baseLength * (i + 1)
 
-		for i := 0; i < iterationsNum; i++ {
+		for j := 0; j < iterationsNum; j++ {
 			input = "+ " + input
 			input = input + " "
 			input = input + startStatement
 		}
 
 		b.Run(fmt.Sprintf("len=%d", iterationsNum), func(b *testing.B) {
-			cntRes, err := Prefix(input)
-
-			if err != nil {
-				fmt.Println(err)
-				fmt.Println("Result is ", cntRes)
-			}
+			cntRes, err = Prefix(input)
 		})
 	}
 }
