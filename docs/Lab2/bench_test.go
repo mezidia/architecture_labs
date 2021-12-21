@@ -5,10 +5,7 @@ import (
 	"testing"
 )
 
-var (
-	startStatement = "+ - / * 1 2 3 4 5"
-)
-
+var startStatement string = "+ - / * 1 2 3 4 5"
 var cntRes int
 var err error
 
