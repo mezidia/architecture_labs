@@ -78,19 +78,19 @@ func BenchmarkPrefix(b *testing.B) {
 
 Ми маємо певний початковий вираз "+ - / * 1 2 3 4 5", який будемо повторювати N разів та передавати як аргумент до методу Prefix. Початковим N було обрано 2500, оскільки при меншій к-сті на деяких ітераціях усе відбувається швидко і ми не отримуємо результати. Як, наприклад, тут, де baseLength = 500:
 
-![BadExample](/RGR/Lab-2-Bench-Bad-Example.png)
+![BadExample](./Task-2/Lab-2-Bench-Bad-Example.png)
 
 ---
 
 Запуск бенчмарка дає нам такі результати:
 
-![Benchmark-Lab2](/RGR/Lab-2-Bench-With-Optimization.png)
+![Benchmark-Lab2](./Task-2/Lab-2-Bench-With-Optimization.png)
 
 ---
 
 Якщо перенести ці дані та відобразити їх на графіку, то отримаємо таку картину:
 
-![Benchmark-Graph-Lab2](/RGR/Lab-2-BenchGraph-With-Optimization.png)
+![Benchmark-Graph-Lab2](./Task-2/Lab-2-BenchGraph-With-Optimization.png)
 
 Можна помітити кілька речей:
 1. Значення X не завжди більше X-1. Наприклад на позначці 7500 X = 0,000545, коли його попередник на 5000 - 0,0009965. Здавалося б, вхідна стрічка збільшилася, а час - зменшився. Як так?
