@@ -119,3 +119,46 @@ func BenchmarkPrefix(b *testing.B) {
 ---
 
 ## 3-тє завдання
+
+Приклад коду:
+```go
+package lab4
+
+import (
+	"fmt"
+	"testing"
+
+	"github.com/mezidia/architecture_labs/tree/main/docs/Lab4/engine"
+)
+
+var txt = "print script"
+var cntRes engine.Command
+
+func BenchmarkCount(b *testing.B) {
+	const baseLen = 7500
+	for i := 0; i < 16; i++ {
+		input := txt
+		l := baseLen * (i + 1)
+
+		for j := 0; j < l; j++ {
+			input = input + "sadstoryline"
+		}
+
+		b.Run(fmt.Sprintf("len=%d", l), func(b *testing.B) {
+			cntRes = Parse(input)
+		})
+	}
+}
+
+```
+
+Результат виконання benchmark-тестів:
+![Benchmark-Results](./Task-3/Benchtest-Results.png)
+
+Графік по точкам:
+![Graph-1](./Task-3/Graph-1.png)
+
+Графік по точкам з апроксимацією:
+![Graph-2](./Task-3/Graph-2.png)
+
+Як бачимо, протестувавши час виконання функції parser з 4-ої лабораторної роботи, лінійний час її роботи було підтверджено.
