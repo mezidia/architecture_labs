@@ -17,7 +17,7 @@ func BenchmarkCount(b *testing.B) {
 		l := baseLen * (i + 1)
 
 		for j := 0; j < l; j++ {
-			input = input + "sadstoryline"
+			input = input + "sadstorylinesadstorylinesadstorylinesadstoryline"
 		}
 
 		b.Run(fmt.Sprintf("len=%d", l), func(b *testing.B) {
