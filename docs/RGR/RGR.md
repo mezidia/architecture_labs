@@ -163,8 +163,6 @@ func BenchmarkCount(b *testing.B) {
 
 Як бачимо, протестувавши час виконання функції parser з 4-ої лабораторної роботи, лінійний час її роботи було підтверджено.
 
----
-
 ![Communication-Diagram-Lab-4](./Task-3/Lab-4-Communication-Diagram.png)
 
 Пояснення до діаграми:
