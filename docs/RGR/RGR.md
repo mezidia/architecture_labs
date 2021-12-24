@@ -153,13 +153,13 @@ func BenchmarkCount(b *testing.B) {
 ```
 
 Результат виконання benchmark-тестів:
-![Benchmark-Results](./Task-3/Benchtest-Results.png)
+![Benchmark-Results](./Task-3/Benchtest-Results.PNG)
 
 Графік по точкам:
-![Graph-1](./Task-3/Graph-1.png)
+![Graph-1](./Task-3/Graph-1.PNG)
 
 Графік по точкам з апроксимацією:
-![Graph-2](./Task-3/Graph-2.png)
+![Graph-2](./Task-3/Graph-2.PNG)
 
 Як бачимо, протестувавши час виконання функції parser з 4-ої лабораторної роботи, лінійний час її роботи було підтверджено.
 
