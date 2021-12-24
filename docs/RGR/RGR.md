@@ -84,7 +84,7 @@ func BenchmarkPrefix(b *testing.B) {
 
 ---
 
-Запуск бенчмарка дає нам такі результати:
+Запуск бенчмарка дає нам такі значення:
 
 ![Benchmark-Lab2](./Task-1/Lab-2-Bench-With-Optimization.png)
 
